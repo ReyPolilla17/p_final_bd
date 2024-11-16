@@ -1,0 +1,80 @@
+.caption-wrapper {
+    display: grid;
+    grid-template-columns: 0.5fr;
+    gap: 30px;
+    align-items: end;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: white;
+    padding: 50px;
+}
+
+.caption-wrapper > .caption {
+    padding: 1px 20px;
+    background-color: #4a3d3d;
+}
+
+.caption-wrapper > .author {
+    display: flex;
+    justify-content: center;
+    background-color: #A49966;
+    width: 150px;
+}
+
+.info-wrapper {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    height: 150px;
+    color: white;
+    background-color: #438E36;
+    border-top: 10px solid white;
+    padding: 0 20px;
+}
+
+.characteristhics-wrapper {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.characteristhics-wrapper > .charactheristic {
+    display: grid;
+    grid-template-columns: 1fr 1fr; 
+    width: 1000px;
+    margin-bottom: -4px;
+}
+
+.characteristhics-wrapper > .charactheristic > .image-wrapper img {
+    height: 300px;
+    width: 100%;
+    object-fit: cover;
+}
+
+.characteristhics-wrapper > .charactheristic > .details {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.characteristhics-wrapper > .charactheristic > .details  h1{
+    color: #A49966;
+}
+
+.about-us-wrapper {
+    background-color: #4a3d3d;
+    padding: 50px;
+    color: white;
+}
+
+.about-us-wrapper a {
+    text-decoration: none;
+    color: #A49966;
+}
+
+.about-us-wrapper p {
+    line-height: 2em;
+}

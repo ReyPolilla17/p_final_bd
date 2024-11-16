@@ -1,0 +1,44 @@
+@media (max-width: 615px) {
+    .header-wrapper > .logo-wrapper  img{
+        height: 5em;
+    }
+
+    .menu-wrapper {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .menu-wrapper > .menu-option {
+        padding: 10px 0px;
+    }
+
+    .caption-wrapper {
+        grid-template-columns: 1fr;
+    }
+    
+    .info-wrapper {
+        height: 100%;
+        font-size: 0.8em;
+    }
+
+    .characteristhics-wrapper {
+        width: 100%;
+    }
+
+    .characteristhics-wrapper > .charactheristic {
+        grid-template-columns: 1fr; 
+        width: inherit;
+    }
+
+    .characteristhics-wrapper > .charactheristic > .image-wrapper {
+        order: 2;
+    }
+    
+    .characteristhics-wrapper > .charactheristic > .details {
+        order: 1;
+    }
+
+    .footer-wrapper {
+        height: 100%;
+    }
+}

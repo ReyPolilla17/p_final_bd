@@ -1,0 +1,40 @@
+.footer-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+    background-color: #03120E;
+    padding: 30px 10px;
+    height: 100px;
+}
+
+.footer-wrapper > .menu-wrapper {
+    display: flex;
+}
+
+.footer-wrapper > .menu-wrapper {
+    display: flex;
+    justify-content: space-around;
+}
+
+.footer-wrapper > .menu-wrapper > .menu-option {
+    width: 200px;
+    text-align: center;
+}
+
+.footer-wrapper > .menu-wrapper a {
+    text-decoration: none;
+    color: white;
+    transition: 0.3s;
+}
+
+.footer-wrapper > .menu-wrapper a:hover {
+    color: #A49966;
+    letter-spacing: 0.05em;
+}
+
+.footer-wrapper > .credits-wrapper {
+    color: #4a3d3d;
+    text-align: center;
+}
