@@ -41,4 +41,8 @@
     .footer-wrapper {
         height: 100%;
     }
+
+    .form > .day-of-birth > .date-group {
+        grid-template-columns: 1fr;
+    }
 }

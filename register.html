@@ -4,9 +4,145 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Crear una Cuenta</title>
+
+    <link rel="stylesheet" href="./styles/common.css">
+    <link rel="stylesheet" href="./styles/forms.css">
+    <link rel="stylesheet" href="./styles/login.css">
+    <link rel="stylesheet" href="./styles/footer.css">
+    <link rel="stylesheet" href="./styles/vertical-screen.css">
+
+    <script src="./scripts/date-selection.js" defer></script>
 </head>
 <body>
-    <a href="./index.html">Inicio</a>
+    <div class="header-wrapper">
+        <div class="logo-wrapper">
+            <a href="./index.html">
+                <img src="./media/logo.png" alt="Logo">
+            </a>
+        </div>
+    </div>
     
+    <div class="body-wrapper" style="background-image: url(./media/libros.jpg);">
+        <div class="form-parent-wrapper">
+            <div class="form-wrapper">
+                <form action="register.php" method="post">
+                    <div class="form">
+                        <h1>Crear Cuenta</h1>
+        
+                        <div class="form-group">
+                            <div class="mandatory">*</div>
+                            <input type="text" name="username" id="username-input" placeholder="Nombre de Ususario">
+                            <label for="username-input">Nombre de Ususario</label>
+                        </div>
+                        
+                        <div class="form-group">
+                            <div class="mandatory">*</div>
+                            <input type="password" name="username" id="password-input" placeholder="Contraseña">
+                            <label for="password-input">Contraseña</label>
+                        </div>
+                        
+                        <div class="form-group">
+                            <div class="mandatory">*</div>
+                            <input type="password" name="username" id="password-confirm" placeholder="Confirma tu Contraseña">
+                            <label for="password-confirm">Confirma tu Contraseña</label>
+                        </div>
+
+                        <div class="day-of-birth">
+                            <div class="section-title">
+                                <h2>Fecha de Nacimiento</h2>
+                                <div class="mandatory">*</div>
+                            </div>
+
+                            <div class="date-group">
+                                <div class="date-element">
+                                    <select name="birth-day" id="day">
+                                        <option value="" style="display: none;">Día</option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                        <option value="6">6</option>
+                                        <option value="7">7</option>
+                                        <option value="8">8</option>
+                                        <option value="9">9</option>
+                                        <option value="10">10</option>
+                                        <option value="11">11</option>
+                                        <option value="12">12</option>
+                                        <option value="13">13</option>
+                                        <option value="14">14</option>
+                                        <option value="15">15</option>
+                                        <option value="16">16</option>
+                                        <option value="17">17</option>
+                                        <option value="18">18</option>
+                                        <option value="19">19</option>
+                                        <option value="20">20</option>
+                                        <option value="21">21</option>
+                                        <option value="22">22</option>
+                                        <option value="23">23</option>
+                                        <option value="24">24</option>
+                                        <option value="25">25</option>
+                                        <option value="26">26</option>
+                                        <option value="27">27</option>
+                                        <option value="28">28</option>
+                                        <option value="29">29</option>
+                                        <option value="30">30</option>
+                                        <option value="31">31</option>
+                                    </select>
+                                    <label for="day">Día</label>
+                                </div>
+                                
+                                <div class="date-element">
+                                    <select name="birth-month" id="month" onchange="updateDaysAviable()">
+                                        <option value="0" style="display: none;">Mes</option>
+                                        <option value="1">Enero</option>
+                                        <option value="2">Febrero</option>
+                                        <option value="3">Marzo</option>
+                                        <option value="4">Abril</option>
+                                        <option value="5">Mayo</option>
+                                        <option value="6">Junio</option>
+                                        <option value="7">Julio</option>
+                                        <option value="8">Agosto</option>
+                                        <option value="9">Septiembre</option>
+                                        <option value="10">Octubre</option>
+                                        <option value="11">Noviembre</option>
+                                        <option value="12">Diciembre</option>
+                                    </select>
+                                    <label for="month">Mes</label>
+                                </div>
+                                
+                                <div class="date-element">
+                                    <input type="text" name="birth-year" id="year" placeholder="Año" onkeyup="updateDaysAviable()">
+                                    <label for="year">Año</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        
+                        <div class="submit-button">
+                            <button type="submit">Registrarse</button>
+                        </div>
+                        
+                        <div class="redirect">
+                            <div class="separator"></div>
+                            ¿Ya tienes una cuenta? <a href="./login.html">¡Inicia sesión!</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer-wrapper">
+        <div class="menu-wrapper">
+            <div class="menu-option">
+                <a href="./index.html">Página Principal</a>
+            </div>
+        </div>
+
+        <div class="credits-wrapper">
+            &copy; 2024 El Archivo del Diodo &#124; Todos los derechos reservados
+        </div>
+    </div>
 </body>
 </html>

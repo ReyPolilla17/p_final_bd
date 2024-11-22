@@ -1,0 +1,144 @@
+.form {
+    background-color: #4A3D3D;
+    border: 3px solid #A49966;
+    color: white;
+    border-radius: 10px;
+    padding: 20px;
+}
+
+.mandatory {
+    color: red;
+}
+
+.form h1, .form > .forgot-password, .form > .redirect {
+    text-align: center;
+}
+
+.form > .redirect > .separator {
+    margin: 20px 0;
+    height: 2px;
+    background-color: #73693B;
+    border-radius: 2px;
+}
+
+.form > .form-group {
+    display: grid;
+    grid-template-columns: 1fr;
+    margin-top: 20px;
+}
+
+.form > .form-group > .mandatory {
+    text-align: right;
+}
+
+.form > .form-group a {
+    padding: 5px 0;
+    text-align: right;
+}
+
+.form > .day-of-birth {
+    margin-top: 20px;
+}
+
+.form > .day-of-birth > .section-title {
+    display: flex;
+    justify-content: space-between;
+}
+
+.form > .day-of-birth > .section-title h2 {
+    margin: 0;
+}
+
+.form > .day-of-birth > .date-group {
+    display: grid;
+    grid-template-columns: 0.25fr 0.5fr 1fr;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.form > .day-of-birth > .date-group > .date-element {
+    display: grid;
+}
+
+.submit-button {
+    display: flex;
+    justify-content: center;
+    padding: 30px 0;
+}
+
+.form button {
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 1.1em;
+    background-color: #A49966;
+    color: white;
+    border: none;
+    transition: 0.3s;
+}
+
+.form button:hover {
+    background-color: #73693B;
+}
+
+.form button:active {
+    background-color: #A49966;
+}
+
+.form a {
+    color: #A49966;
+    text-decoration: none;
+}
+
+.form a:hover {
+    text-decoration: underline;
+}
+
+.form input, .form select {
+    font-size: 1.1em;
+    font-family: inherit;
+    color: #4A3D3D;
+    padding: 0.5em ;
+    border-radius: 5px;
+    border: 3px solid #A49966;
+    display: block;
+    transition: all 0.3s;
+}
+
+.form input:focus, .form select:focus {
+    outline: none;
+    border: 3px solid #73693B;
+}
+
+.form input::-webkit-input-placeholder {
+    color: #4A3D3D;
+}
+
+.form input:focus::-webkit-input-placeholder {
+    color: transparent;
+}
+
+.form label {
+    font-size: 1.1rem;
+    font-weight: 500;
+    margin-left: 0.7rem;
+    margin-bottom: 0.7rem;
+    display: block;
+    transition: all 0.3s;
+    visibility: hidden;
+    opacity: 0;
+}
+
+.form input:focus + label, .form input:not(:placeholder-shown) + label, .form select:has(option:checked:not(:first-child)) + label {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0.7rem);
+}
+
+.a {
+    color: #03120E;
+    color: #302727;
+    color: #4A3D3D;
+    color: #438E36;
+    color: #73693B;
+    color: #A49966;
+}

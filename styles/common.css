@@ -2,3 +2,16 @@ body {
     margin: 0;
     font-family: Roboto, sans-serif;
 }
+
+::-webkit-scrollbar {
+    width: 5px;
+}
+  
+::-webkit-scrollbar-track {
+    background: #302727;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 5px;
+    background: #4A3D3D;
+}
