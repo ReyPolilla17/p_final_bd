@@ -4,12 +4,12 @@
     background-color: #03120E;
 }
 
-.header-wrapper > .logo-wrapper {
+.header-wrapper > .left-logo-wrapper {
     display: flex;
     justify-content: center;
 }
 
-.header-wrapper > .logo-wrapper img{
+.header-wrapper > .left-logo-wrapper img{
     height: 8em;
 }
 

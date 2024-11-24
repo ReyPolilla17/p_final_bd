@@ -1,6 +1,12 @@
 @media (max-width: 615px) {
-    .header-wrapper > .logo-wrapper  img{
-        height: 10em;
+    .header-wrapper > .logo-wrapper img {
+        width: 100%;
+        height: auto;
+    }
+
+    .header-wrapper > .left-logo-wrapper img {
+        width: 50%;
+        height: auto;
     }
 
     .menu-wrapper {
