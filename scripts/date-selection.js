@@ -10,8 +10,7 @@ function updateDaysAviable() {
 
     const daysAv = [`<option value="0" style="display: none;">Día</option>`]; // arreglo con los días disponibles
 
-    if(isNaN(year.value) || year.value === '') // si se introduce un valor inválido de año, considera el año actual
-    {
+    if(isNaN(year.value) || year.value === '') { // si se introduce un valor inválido de año, considera el año actual
         maxDay = new Date(curYear, month.value, 0).getDate();
     }
     

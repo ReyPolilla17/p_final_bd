@@ -4,6 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Crear una Cuenta</title>
+    <link rel="shortcut icon" href="./media/logos/favicon.ico" type="image/x-icon">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="./styles/common.css">
     <link rel="stylesheet" href="./styles/forms.css">
@@ -12,20 +17,21 @@
     <link rel="stylesheet" href="./styles/vertical-screen.css">
 
     <script src="./scripts/date-selection.js" defer></script>
+    <script src="./scripts/validations.js" defer></script>
 </head>
 <body>
     <div class="header-wrapper">
         <div class="logo-wrapper">
             <a href="./index.html">
-                <img src="./media/logo.png" alt="Logo">
+                <img src="./media/logos/logo-secundario.png" alt="Logo">
             </a>
         </div>
     </div>
     
-    <div class="body-wrapper" style="background-image: url(./media/libros.jpg);">
+    <div class="body-wrapper" style="background-image: url(./media/images/libros.jpg);">
         <div class="form-parent-wrapper">
             <div class="form-wrapper">
-                <form action="register.php" method="post">
+                <form action="register.php" method="post" onsubmit="return validateRegister()">
                     <div class="form">
                         <h1>Crear Cuenta</h1>
         
@@ -56,7 +62,7 @@
                             <div class="date-group">
                                 <div class="date-element">
                                     <select name="birth-day" id="day">
-                                        <option value="" style="display: none;">Día</option>
+                                        <option value="0" style="display: none;">Día</option>
                                         <option value="1">1</option>
                                         <option value="2">2</option>
                                         <option value="3">3</option>

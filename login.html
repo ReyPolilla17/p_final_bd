@@ -4,26 +4,33 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inicio de Sesión</title>
+    <link rel="shortcut icon" href="./media/logos/favicon.ico" type="image/x-icon">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="./styles/common.css">
     <link rel="stylesheet" href="./styles/forms.css">
     <link rel="stylesheet" href="./styles/login.css">
     <link rel="stylesheet" href="./styles/footer.css">
     <link rel="stylesheet" href="./styles/vertical-screen.css">
+
+    <script src="./scripts/validations.js" defer></script>
 </head>
 <body>
     <div class="header-wrapper">
         <div class="logo-wrapper">
             <a href="./index.html">
-                <img src="./media/logo.png" alt="Logo">
+                <img src="./media/logos/logo-secundario.png" alt="Logo">
             </a>
         </div>
     </div>
     
-    <div class="body-wrapper" style="background-image: url(./media/pasillo-libros.jpg);">
+    <div class="body-wrapper" style="background-image: url(./media/images/pasillo-libros.jpg);">
         <div class="form-parent-wrapper">
             <div class="form-wrapper">
-                <form action="login.php" method="post">
+                <form action="login.php" method="post" onsubmit="return validateLogin()">
                     <div class="form">
                         <h1>Inicia Sesión</h1>
         
