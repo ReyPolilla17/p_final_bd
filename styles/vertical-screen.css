@@ -48,7 +48,7 @@
         height: 100%;
     }
 
-    .form > .day-of-birth > .date-group {
+    .form > .date-of-birth > .date-group {
         grid-template-columns: 1fr;
     }
 }

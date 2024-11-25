@@ -36,32 +36,32 @@
                         <h1>Crear Cuenta</h1>
         
                         <div class="form-group">
-                            <div class="mandatory">*</div>
-                            <input type="text" name="username" id="username-input" placeholder="Nombre de Ususario">
+                            <div id="username-m" class="mandatory">*</div>
+                            <input type="text" name="username" id="username-input" placeholder="Nombre de Ususario" onkeydown="resetWarning('username-m')">
                             <label for="username-input">Nombre de Ususario</label>
                         </div>
                         
                         <div class="form-group">
-                            <div class="mandatory">*</div>
-                            <input type="password" name="username" id="password-input" placeholder="Contraseña">
+                            <div id="password-m" class="mandatory">*</div>
+                            <input type="password" name="username" id="password-input" placeholder="Contraseña" onkeydown="resetWarning('password-m')">
                             <label for="password-input">Contraseña</label>
                         </div>
                         
                         <div class="form-group">
-                            <div class="mandatory">*</div>
-                            <input type="password" name="username" id="password-confirm" placeholder="Confirma tu Contraseña">
+                            <div id="password-confirm-m" class="mandatory">*</div>
+                            <input type="password" name="username" id="password-confirm" placeholder="Confirma tu Contraseña" onkeydown="resetWarning('password-confirm-m')">
                             <label for="password-confirm">Confirma tu Contraseña</label>
                         </div>
 
-                        <div class="day-of-birth">
+                        <div class="date-of-birth">
                             <div class="section-title">
+                                <div id="birth-date-m" class="mandatory">*</div>
                                 <h2>Fecha de Nacimiento</h2>
-                                <div class="mandatory">*</div>
                             </div>
 
                             <div class="date-group">
                                 <div class="date-element">
-                                    <select name="birth-day" id="day">
+                                    <select name="birth-day" id="day" onchange="resetWarning('birth-date-m')">
                                         <option value="0" style="display: none;">Día</option>
                                         <option value="1">1</option>
                                         <option value="2">2</option>
@@ -99,7 +99,7 @@
                                 </div>
                                 
                                 <div class="date-element">
-                                    <select name="birth-month" id="month" onchange="updateDaysAviable()">
+                                    <select name="birth-month" id="month" onchange="updateDaysAviable(), resetWarning('birth-date-m')">
                                         <option value="0" style="display: none;">Mes</option>
                                         <option value="1">Enero</option>
                                         <option value="2">Febrero</option>
@@ -118,7 +118,7 @@
                                 </div>
                                 
                                 <div class="date-element">
-                                    <input type="text" name="birth-year" id="year" placeholder="Año" onkeyup="updateDaysAviable()">
+                                    <input type="text" name="birth-year" id="year" placeholder="Año" onkeyup="updateDaysAviable(), resetWarning('birth-date-m')">
                                     <label for="year">Año</label>
                                 </div>
                             </div>

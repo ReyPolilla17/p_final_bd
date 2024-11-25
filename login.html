@@ -35,12 +35,14 @@
                         <h1>Inicia Sesión</h1>
         
                         <div class="form-group">
-                            <input type="text" name="username" id="username-input" placeholder="Ususario">
+                            <div id="username-m" class="mandatory" style="opacity: 0;">Debes introducir tu usuario</div>
+                            <input type="text" name="username" id="username-input" placeholder="Ususario" onkeydown="hideWarning('username-m')">
                             <label for="username-input">Ususario</label>
                         </div>
                 
                         <div class="form-group">
-                            <input type="password" name="username" id="password-input" placeholder="Contraseña">
+                            <div id="password-m" class="mandatory" style="opacity: 0;">Debes introducir tu contraseña</div>
+                            <input type="password" name="username" id="password-input" placeholder="Contraseña" onkeydown="hideWarning('password-m')">
                             <label for="password-input">Contraseña</label>
                         </div>
                         
@@ -49,7 +51,7 @@
                         </div>
 
                         <div class="forgot-password">
-                            <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">¿Olvidaste tu contraseña?</a>
+                            <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank">¿Olvidaste tu contraseña?</a>
                         </div>
                         
                         <div class="redirect">

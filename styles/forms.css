@@ -8,6 +8,8 @@
 
 .mandatory {
     color: red;
+    text-align: right;
+    transition: 0.1s;
 }
 
 .form h1, .form > .forgot-password, .form > .redirect {
@@ -27,36 +29,27 @@
     margin-top: 20px;
 }
 
-.form > .form-group > .mandatory {
-    text-align: right;
-}
-
 .form > .form-group a {
     padding: 5px 0;
     text-align: right;
 }
 
-.form > .day-of-birth {
+.form > .date-of-birth {
     margin-top: 20px;
 }
 
-.form > .day-of-birth > .section-title {
-    display: flex;
-    justify-content: space-between;
-}
-
-.form > .day-of-birth > .section-title h2 {
+.form > .date-of-birth > .section-title h2 {
     margin: 0;
 }
 
-.form > .day-of-birth > .date-group {
+.form > .date-of-birth > .date-group {
     display: grid;
     grid-template-columns: 0.25fr 0.5fr 1fr;
     gap: 10px;
     margin-top: 20px;
 }
 
-.form > .day-of-birth > .date-group > .date-element {
+.form > .date-of-birth > .date-group > .date-element {
     display: grid;
 }
 
@@ -132,13 +125,4 @@
     opacity: 1;
     visibility: visible;
     transform: translateY(0.7rem);
-}
-
-.a {
-    color: #03120E;
-    color: #302727;
-    color: #4A3D3D;
-    color: #438E36;
-    color: #73693B;
-    color: #A49966;
 }
