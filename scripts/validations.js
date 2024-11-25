@@ -63,9 +63,15 @@ function validateRegister() {
 
     if(username === '') {
         usr_m.innerText = "Este campo es obligatorio. *";
-
+        
+        v = false;
+    } else if(hasProhibitedChars(username)) {
+        usr_m.innerText = "El usuario solo puede contener: *\nguión bajo, letras y numeros.";
+        
         v = false;
     }
+
+    
     
     if(password === '') {
         pswd_m.innerText = "Este campo es obligatorio. *";
@@ -109,4 +115,14 @@ function validateRegister() {
     console.log(`${day}/${month}/${year}`);
 
     return v;
+}
+
+function hasProhibitedChars(username) {
+    var allowedChars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890_".split("");
+
+    allowedChars.forEach(char => {
+        username = username.replaceAll(char, "");
+    });
+
+    return username.length;
 }
