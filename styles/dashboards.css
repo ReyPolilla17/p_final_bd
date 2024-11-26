@@ -1,0 +1,121 @@
+.header-wrapper {
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    justify-content: space-between;
+    background-color: #03120E;
+    color: white;
+}
+
+.header-wrapper > .logo-wrapper img {
+    width: 25%;
+}
+
+.user-wrapper {
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #302727;
+    color: white;
+}
+
+.user-wrapper > .user-profile {
+    display: flex;
+    align-items: center;
+}
+
+.user-wrapper > .user-profile > .user-image {
+    display: flex;
+    align-items: center;
+    width: 80px;
+    height: 80px;
+    overflow: hidden;
+    border-radius: 100%;
+}
+
+.user-wrapper > .user-profile > .user-image img {
+    width: inherit;
+}
+
+.user-wrapper > .user-profile > .user-name {
+    padding-left: 20px;
+    font-size: 1.3em;
+}
+
+.user-wrapper > .logout {
+    display: flex;
+    align-items: center;
+    font-size: 1.5em;
+}
+
+.user-wrapper > .logout span {
+    padding-right: 10px;
+}
+
+.content-wrapper {
+    display: grid;
+    grid-template-columns: 0.2fr 1fr;
+    height: 600px;
+}
+
+.content-wrapper > .nav-bar-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: #A49966;
+    color: white;
+}
+
+.content-wrapper > .nav-bar-wrapper > .nav-bar > .nav-bar-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 1.5em;
+    font-weight: bolder;
+    background-color: #A49966;
+    padding: 20px;
+    border-bottom: 2px solid #73693B;
+}
+
+.content-wrapper > .nav-bar-wrapper > .nav-bar > .nav-bar-item span {
+    padding-right: 20px;
+}
+
+.content-wrapper > .nav-bar-wrapper > .nav-bar > .nav-bar-item:hover {
+    background-color: #73693B;
+}
+
+.content-wrapper > .nav-bar-wrapper > .profile-settings {
+    display: flex;
+    align-items: center;
+    font-size: 1.5em;
+    font-weight: bolder;
+    background-color: #A49966;
+    padding: 20px;
+    border-top: 2px solid #73693B;
+}
+
+.content-wrapper > .nav-bar-wrapper > .profile-settings i {
+    padding-right: 20px;
+}
+
+.content-wrapper > .nav-bar-wrapper > .profile-settings:hover {
+    background-color: #73693B;
+}
+
+.content-wrapper > .section-wrapper {
+    padding: 30px;
+    overflow-y: scroll;
+}
+
+.content-wrapper > .section-wrapper > .section-title {
+    background-color: #438E36;
+    color: white;
+    padding: 15px;
+    border-radius: 20px;
+}
+
+.content-wrapper > .section-wrapper > .section-title h1 {
+    margin: 0;
+}

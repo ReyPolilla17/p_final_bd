@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Panel de Administrador</title>
+
+    <link rel="shortcut icon" href="./media/logos/favicon.ico" type="image/x-icon">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="./styles/common.css">
+    <link rel="stylesheet" href="./styles/vertical-screen.css">
+    <link rel="stylesheet" href="./styles/dashboards.css">
+
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+	<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+    
+    <script src="https://kit.fontawesome.com/9e78df03eb.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="header-wrapper">
+        <div class="logo-wrapper">
+            <img src="./media/logos/logo.png" alt="Logo">
+        </div>
+        <div class="title-wrapper">
+            <h1>Panel de Administrador</h1>
+        </div>
+    </div>
+    <div class="user-wrapper">
+        <div class="user-profile">
+            <div class="user-image">
+                <img src="./media/dynamic/users/libros.jpg" alt="User IMage">
+            </div>
+            <div class="user-name">
+                {USERNAME}
+            </div>
+        </div>
+        <div class="logout">
+            <span>Cerrar sesion</span>
+            
+            <i class="fa-solid fa-right-from-bracket"></i>
+        </div>
+    </div>
+    <div class="content-wrapper">
+        <div class="nav-bar-wrapper">
+            <div class="nav-bar">
+                <div class="nav-bar-item">
+                     <span>Libros</span>
+                     <i class="fa-solid fa-book"></i>
+                    </div>
+                <div class="nav-bar-item">
+                    <span>Usuarios</span>
+                    <i class="fa-solid fa-users"></i>
+                </div>
+                <div class="nav-bar-item">
+                    <span>Análisis</span>
+                    <i class="fa-solid fa-chart-line"></i>
+                </div>
+            </div>
+            <div class="profile-settings">
+                <i class="fa-solid fa-user"></i>
+                Mi perfil
+            </div>
+        </div>
+        <div class="section-wrapper">
+            <div class="section-title">
+                <h1>
+                    {TITLE}
+                </h1>
+            </div>
+        </div>
+    </div>
+    <div class="footer-wrapper">
+
+    </div>
+</body>
+</html>
