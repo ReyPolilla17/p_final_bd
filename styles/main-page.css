@@ -104,6 +104,10 @@
     color: #A49966;
 }
 
+.anchor-link {
+    text-decoration: none;
+}
+
 .about-us-wrapper {
     background-color: #4a3d3d;
     padding: 50px;

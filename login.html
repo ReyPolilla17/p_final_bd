@@ -35,13 +35,17 @@
                         <h1>Inicia Sesión</h1>
         
                         <div class="form-group">
-                            <div id="username-m" class="mandatory" style="opacity: 0;">Debes introducir tu usuario</div>
+                            <a href="#username-m" name="username">
+                                <div id="username-m" class="mandatory" style="opacity: 0;">Debes introducir tu usuario</div>
+                            </a>
                             <input type="text" name="username" id="username-input" placeholder="Ususario" onkeydown="hideWarning('username-m')">
                             <label for="username-input">Ususario</label>
                         </div>
                 
                         <div class="form-group">
-                            <div id="password-m" class="mandatory" style="opacity: 0;">Debes introducir tu contraseña</div>
+                            <a href="#password-m" name="password">
+                                <div id="password-m" class="mandatory" style="opacity: 0;">Debes introducir tu contraseña</div>
+                            </a>
                             <input type="password" name="username" id="password-input" placeholder="Contraseña" onkeydown="hideWarning('password-m')">
                             <label for="password-input">Contraseña</label>
                         </div>

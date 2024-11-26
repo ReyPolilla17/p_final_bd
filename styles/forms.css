@@ -29,11 +29,6 @@
     margin-top: 20px;
 }
 
-.form > .form-group a {
-    padding: 5px 0;
-    text-align: right;
-}
-
 .form > .date-of-birth {
     margin-top: 20px;
 }
@@ -84,6 +79,22 @@
 
 .form a:hover {
     text-decoration: underline;
+}
+
+.form > .form-group a {
+    text-decoration: none;
+}
+
+.form > .form-group a:hover {
+    cursor: text;
+}
+
+.form > .date-of-birth > .section-title a {
+    text-decoration: none;
+}
+
+.form > .date-of-birth > .section-title a:hover {
+    cursor: text;
 }
 
 .form input, .form select {

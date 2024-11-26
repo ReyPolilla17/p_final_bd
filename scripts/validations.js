@@ -17,6 +17,8 @@ function validateLogin() {
     var usr_m = document.getElementById("username-m");
     var pswd_m = document.getElementById("password-m");
 
+    var redirect = null;
+
     var v = true;
 
     if(username === '') {
@@ -24,11 +26,24 @@ function validateLogin() {
 
         v = false;
     }
+
+    if(!redirect && !v) {
+        redirect = "username-m";
+    }
     
     if(password === '') {
         pswd_m.style.opacity = 1;
-
+        
         v = false;
+
+    }
+
+    if(!redirect && !v) {
+        redirect = "password-m";
+    }
+
+    if(redirect) {
+        window.location.href = `#${redirect}`;
     }
 
     // buscar el ususario, si existe, admitirlo
@@ -59,6 +74,8 @@ function validateRegister() {
     var minDate = new Date(curDate.getFullYear() - 15, curDate.getMonth(), curDate.getDate());
     var maxDate = new Date(curDate.getFullYear() - 200, curDate.getMonth(), curDate.getDate());
 
+    var redirect = null;
+
     var v = true;
 
     if(username === '') {
@@ -71,12 +88,18 @@ function validateRegister() {
         v = false;
     }
 
-    
+    if(!redirect && !v) {
+        redirect = "username-m";
+    }
     
     if(password === '') {
         pswd_m.innerText = "Este campo es obligatorio. *";
         
         v = false;
+    }
+
+    if(!redirect && !v) {
+        redirect = "password-m";
     }
 
     if(password_confirm === '') {
@@ -87,6 +110,10 @@ function validateRegister() {
         pswd_c_m.innerText = "Las contraseñas no coinciden. *";
         
         v = false;
+    }
+
+    if(!redirect && !v) {
+        redirect = "password-confirm-m";
     }
 
     if(!day || !month || !year) {
@@ -105,6 +132,14 @@ function validateRegister() {
         date_m.innerText = "No se admiten viajeros del pasado. *";
         
         v = false;
+    }
+
+    if(!redirect && !v) {
+        redirect = "birth-date-m";
+    }
+
+    if(redirect) {
+        window.location.href = `#${redirect}`;
     }
 
     // validar si el usuario está en uso, si no, inicia sesión
