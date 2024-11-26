@@ -83,11 +83,15 @@ function validateRegister() {
         
         v = false;
     } else if(hasProhibitedChars(username)) {
-        usr_m.innerText = "El usuario solo puede contener: *\nguión bajo, letras y numeros.";
+        usr_m.innerText = "Este campo solo puede contener: *\nguión bajo, letras y numeros.";
         
         v = false;
+    } else if(username.length > 50) {
+        usr_m.innerText = "Este campo debe ser menor a 50 caracteres. *";
+        
+        v = false;        
     }
-
+    
     if(!redirect && !v) {
         redirect = "username-m";
     }
@@ -96,8 +100,12 @@ function validateRegister() {
         pswd_m.innerText = "Este campo es obligatorio. *";
         
         v = false;
+    } else if(password.length > 50) {
+        usr_m.innerText = "Este campo debe ser menor a 50 caracteres. *";
+        
+        v = false;        
     }
-
+    
     if(!redirect && !v) {
         redirect = "password-m";
     }
@@ -144,7 +152,7 @@ function validateRegister() {
 
     // validar si el usuario está en uso, si no, inicia sesión
     
-    console.log(username);
+    console.log(username.length);
     console.log(password);
     console.log(password_confirm);
     console.log(`${day}/${month}/${year}`);
