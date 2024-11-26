@@ -101,7 +101,7 @@ function validateRegister() {
         date_m.innerText = "No se admiten menores a 15 años. *";
         
         v = false;
-    } else if(birthDate < maxDate) {
+    } else if(birthDate < maxDate || year < curDate.getFullYear() - 200) {
         date_m.innerText = "No se admiten viajeros del pasado. *";
         
         v = false;
