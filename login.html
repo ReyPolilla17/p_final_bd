@@ -24,6 +24,9 @@
     <link rel="stylesheet" href="./styles/footer.css">
     <link rel="stylesheet" href="./styles/vertical-screen.css">
 
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+	<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+
     <script src="./scripts/validations.js" defer></script>
 </head>
 <body>
@@ -38,12 +41,12 @@
     <div class="body-wrapper" style="background-image: url(./media/images/pasillo-libros.jpg);">
         <div class="form-parent-wrapper">
             <div class="form-wrapper">
-                <form action="login.php" method="post" onsubmit="return validateLogin()">
+                <form action="./dashboard.php" method="post" onsubmit="return validateLogin()">
                     <div class="form">
                         <h1>Inicia Sesión</h1>
         
                         <div class="form-group">
-                            <a href="#username-m" name="username">
+                            <a href="#username-m" name="username" tabindex="-1">
                                 <div id="username-m" class="mandatory" style="opacity: 0;">Debes introducir tu usuario</div>
                             </a>
                             <input type="text" name="username" id="username-input" placeholder="Ususario" onkeydown="hideWarning('username-m')">
@@ -51,10 +54,10 @@
                         </div>
                 
                         <div class="form-group">
-                            <a href="#password-m" name="password">
+                            <a href="#password-m" name="password" tabindex="-1">
                                 <div id="password-m" class="mandatory" style="opacity: 0;">Debes introducir tu contraseña</div>
                             </a>
-                            <input type="password" name="username" id="password-input" placeholder="Contraseña" onkeydown="hideWarning('password-m')">
+                            <input type="password" name="password" id="password-input" placeholder="Contraseña" onkeydown="hideWarning('password-m')">
                             <label for="password-input">Contraseña</label>
                         </div>
                         

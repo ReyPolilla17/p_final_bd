@@ -24,6 +24,9 @@
     <link rel="stylesheet" href="./styles/footer.css">
     <link rel="stylesheet" href="./styles/vertical-screen.css">
 
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+	<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+
     <script src="./scripts/date-selection.js" defer></script>
     <script src="./scripts/validations.js" defer></script>
 </head>
@@ -39,12 +42,12 @@
     <div class="body-wrapper" style="background-image: url(./media/images/libros.jpg);">
         <div class="form-parent-wrapper">
             <div class="form-wrapper">
-                <form action="register.php" method="post" onsubmit="return validateRegister()">
+                <form action="./dashboard.php" method="post" onsubmit="return validateRegister()">
                     <div class="form">
                         <h1>Crear Cuenta</h1>
         
                         <div class="form-group">
-                            <a href="#usename-m" name="username">
+                            <a href="#usename-m" name="username" tabindex="-1">
                                 <div id="username-m" class="mandatory">*</div>
                             </a>
                             <input type="text" name="username" id="username-input" placeholder="Nombre de Ususario" onkeydown="resetWarning('username-m')">
@@ -52,24 +55,24 @@
                         </div>
                         
                         <div class="form-group">
-                            <a href="#password-m" name="password">
+                            <a href="#password-m" name="password" tabindex="-1">
                                 <div id="password-m" class="mandatory">*</div>
                             </a>
-                            <input type="password" name="username" id="password-input" placeholder="Contraseña" onkeydown="resetWarning('password-m')">
+                            <input type="password" name="password" id="password-input" placeholder="Contraseña" onkeydown="resetWarning('password-m')">
                             <label for="password-input">Contraseña</label>
                         </div>
                         
                         <div class="form-group">
-                            <a href="#password-confirm-m" name="password-confirm">
+                            <a href="#password-confirm-m" name="password-confirm" tabindex="-1">
                                 <div id="password-confirm-m" class="mandatory">*</div>
                             </a>
-                            <input type="password" name="username" id="password-confirm" placeholder="Confirma tu Contraseña" onkeydown="resetWarning('password-confirm-m')">
+                            <input type="password" name="password" id="password-confirm" placeholder="Confirma tu Contraseña" onkeydown="resetWarning('password-confirm-m')">
                             <label for="password-confirm">Confirma tu Contraseña</label>
                         </div>
 
                         <div class="date-of-birth">
                             <div class="section-title">
-                                <a href="#birth-date-m" name="birth-date">
+                                <a href="#birth-date-m" name="birth-date" tabindex="-1">
                                     <div id="birth-date-m" class="mandatory">*</div>
                                 </a>
                                 <h2>Fecha de Nacimiento</h2>

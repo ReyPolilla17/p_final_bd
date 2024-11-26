@@ -22,6 +22,7 @@ function validateLogin() {
     var v = true;
 
     if(username === '') {
+        usr_m.innerText = "Debes introducir tu usuario";
         usr_m.style.opacity = 1;
 
         v = false;
@@ -42,16 +43,35 @@ function validateLogin() {
         redirect = "password-m";
     }
 
+    if(v) {
+        $.ajax({
+            url: './php/logincheck.php',
+            dataType: 'html',
+            type: 'POST',
+            async: false,
+            data: `username=${username}&password=${password}`,
+            success: function(result, status, xhr) { 
+                if(parseInt(result) === 0) {
+                    usr_m.innerText = "Usuario o contraseña incorrectos";
+                    usr_m.style.opacity = 1;
+
+                    redirect = "$username-m";
+                    v = false
+                } 
+            },
+            error: eFnction
+        });
+    }
+
     if(redirect) {
         window.location.href = `#${redirect}`;
     }
-
-    // buscar el ususario, si existe, admitirlo
-
-    console.log(username);
-    console.log(password);
-
+    
     return v;
+}
+
+function eFnction(xhr, status, error) {
+    console.log(xhr, status, error);
 }
 
 function validateRegister() {
@@ -145,17 +165,29 @@ function validateRegister() {
     if(!redirect && !v) {
         redirect = "birth-date-m";
     }
+    
+    if(v) {
+        $.ajax({
+            url: './php/registercheck.php',
+            dataType: 'html',
+            type: 'POST',
+            async: false,
+            data: `username=${username}&password=${password}&date=${year}-${month}-${day}`,
+            success: function(result, status, xhr) { 
+                if(parseInt(result) === 0) {
+                    usr_m.innerText = "Este nombre ya está en uso. *";
+
+                    redirect = "username-m";
+                    v = false
+                }
+            },
+            error: eFnction
+        });
+    }
 
     if(redirect) {
         window.location.href = `#${redirect}`;
     }
-
-    // validar si el usuario está en uso, si no, inicia sesión
-    
-    console.log(username.length);
-    console.log(password);
-    console.log(password_confirm);
-    console.log(`${day}/${month}/${year}`);
 
     return v;
 }

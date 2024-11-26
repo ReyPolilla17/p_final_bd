@@ -83,10 +83,8 @@
 
 .form > .form-group a {
     text-decoration: none;
-}
-
-.form > .form-group a:hover {
-    cursor: text;
+    pointer-events: none;
+    cursor: default;
 }
 
 .form > .date-of-birth > .section-title a {
