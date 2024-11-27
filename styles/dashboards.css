@@ -53,6 +53,16 @@
     padding-right: 10px;
 }
 
+.user-wrapper > .logout a {
+    text-decoration: none;
+    color: white;
+    transition: 0.3s;
+}
+
+.user-wrapper > .logout a:hover {    
+    color: #A49966;
+}
+
 .content-wrapper {
     display: grid;
     grid-template-columns: 0.2fr 1fr;

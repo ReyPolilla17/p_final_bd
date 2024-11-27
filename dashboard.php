@@ -1,4 +1,5 @@
 <?php
+    require_once "HTML/Template/ITX.php";
     include './php/config.php';
 
     $user = implode("\'", explode("'", implode("\\\\", explode("\\", $_POST['username']))));
@@ -13,17 +14,24 @@
 
     $result = mysqli_query($link, $query);
 
+    $template = new HTML_Template_ITX('./templates');
+    
     if($line = mysqli_fetch_assoc($result)) {
-        if($line['admin_p']) {
-            print("<ul><li>Admin</li><li>$user</li><li>$pass</li></ul>");
+        $template->loadTemplatefile("dashboard.html", true, true);
+        $template->setVariable("USERNAME", $_POST['username']);
+        $template->setVariable("U_IMAGE", $line['imagen']);
+
+        if($line['admin_p']) {    
+            $template->setVariable("SECTION_NAME", 'Panel de Administrador');
             // cargar template de admin
         }
         else {
-            print("<ul><li>User</li><li>$user</li><li>$pass</li></ul>");
+            $template->setVariable("SECTION_NAME", 'El Archivo del Diodo');
             // cargar template de usuario
         }
     } else {
         print("<h1>Como llegaste hasta aqui?</h1>");
     }
 
+    $template->show();
 ?>

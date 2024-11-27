@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <title>Panel de Administrador</title>
+    <title>{SECTION_NAME}</title>
 
     <link rel="shortcut icon" href="./media/logos/favicon.ico" type="image/x-icon">
 
@@ -27,52 +27,28 @@
             <img src="./media/logos/logo.png" alt="Logo">
         </div>
         <div class="title-wrapper">
-            <h1>Panel de Administrador</h1>
+            <h1>{SECTION_NAME}</h1>
         </div>
     </div>
     <div class="user-wrapper">
         <div class="user-profile">
             <div class="user-image">
-                <img src="./media/dynamic/users/libros.jpg" alt="User IMage">
+                <img src="./media/dynamic/users/{U_IMAGE}" alt="User Image">
             </div>
             <div class="user-name">
                 {USERNAME}
             </div>
         </div>
         <div class="logout">
-            <span>Cerrar sesion</span>
-            
-            <i class="fa-solid fa-right-from-bracket"></i>
+            <a href="./index.html">
+                <span>Cerrar sesion</span>
+                
+                <i class="fa-solid fa-right-from-bracket"></i>
+            </a>
         </div>
     </div>
     <div class="content-wrapper">
-        <div class="nav-bar-wrapper">
-            <div class="nav-bar">
-                <div class="nav-bar-item">
-                     <span>Libros</span>
-                     <i class="fa-solid fa-book"></i>
-                    </div>
-                <div class="nav-bar-item">
-                    <span>Usuarios</span>
-                    <i class="fa-solid fa-users"></i>
-                </div>
-                <div class="nav-bar-item">
-                    <span>Análisis</span>
-                    <i class="fa-solid fa-chart-line"></i>
-                </div>
-            </div>
-            <div class="profile-settings">
-                <i class="fa-solid fa-user"></i>
-                Mi perfil
-            </div>
-        </div>
-        <div class="section-wrapper">
-            <div class="section-title">
-                <h1>
-                    {TITLE}
-                </h1>
-            </div>
-        </div>
+        {CONTENTS}
     </div>
     <div class="footer-wrapper">
 
