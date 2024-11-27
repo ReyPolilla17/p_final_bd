@@ -70,10 +70,6 @@ function validateLogin() {
     return v;
 }
 
-function eFnction(xhr, status, error) {
-    console.log(xhr, status, error);
-}
-
 function validateRegister() {
     var username = document.getElementById("username-input").value;
 
@@ -200,4 +196,8 @@ function hasProhibitedChars(username) {
     });
 
     return username.length;
+}
+
+function eFnction(xhr, status, error) {
+    console.log(xhr, status, error);
 }
