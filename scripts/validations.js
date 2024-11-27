@@ -18,6 +18,7 @@ function validateLogin() {
     var pswd_m = document.getElementById("password-m");
 
     var redirect = null;
+    var select = null;
 
     var v = true;
 
@@ -30,6 +31,7 @@ function validateLogin() {
 
     if(!redirect && !v) {
         redirect = "username-m";
+        select = "username-input";
     }
     
     if(password === '') {
@@ -41,6 +43,7 @@ function validateLogin() {
 
     if(!redirect && !v) {
         redirect = "password-m";
+        select = "password-input";
     }
 
     if(v) {
@@ -56,6 +59,7 @@ function validateLogin() {
                     usr_m.style.opacity = 1;
 
                     redirect = "$username-m";
+                    select = "username-input";
                     v = false
                 } 
             },
@@ -65,6 +69,10 @@ function validateLogin() {
 
     if(redirect) {
         window.location.href = `#${redirect}`;
+    }
+    
+    if(select) {
+        document.getElementById(select).focus();
     }
     
     return v;
@@ -91,6 +99,7 @@ function validateRegister() {
     var maxDate = new Date(curDate.getFullYear() - 200, curDate.getMonth(), curDate.getDate());
 
     var redirect = null;
+    var select = null;
 
     var v = true;
 
@@ -110,6 +119,7 @@ function validateRegister() {
     
     if(!redirect && !v) {
         redirect = "username-m";
+        select = "username-input";
     }
     
     if(password === '') {
@@ -124,6 +134,7 @@ function validateRegister() {
     
     if(!redirect && !v) {
         redirect = "password-m";
+        select = "password-input";
     }
 
     if(password_confirm === '') {
@@ -138,6 +149,7 @@ function validateRegister() {
 
     if(!redirect && !v) {
         redirect = "password-confirm-m";
+        select = "password-confirm";
     }
 
     if(!day || !month || !year) {
@@ -163,6 +175,7 @@ function validateRegister() {
     }
     
     if(v) {
+        console.log(v);
         $.ajax({
             url: './php/registercheck.php',
             dataType: 'html',
@@ -174,6 +187,7 @@ function validateRegister() {
                     usr_m.innerText = "Este nombre ya está en uso. *";
 
                     redirect = "username-m";
+                    select = "username-input";
                     v = false
                 }
             },
@@ -183,6 +197,10 @@ function validateRegister() {
 
     if(redirect) {
         window.location.href = `#${redirect}`;
+    }
+    
+    if(select) {
+        document.getElementById(select).focus();
     }
 
     return v;
