@@ -19,10 +19,19 @@
     if($line = mysqli_fetch_assoc($result)) {
         $template->loadTemplatefile("dashboard.html", true, true);
         $template->setVariable("USERNAME", $_POST['username']);
+        $template->setVariable("PASSWORD", $_POST['password']);
         $template->setVariable("U_IMAGE", $line['imagen']);
 
         if($line['admin_p']) {    
             $template->setVariable("SECTION_NAME", 'Panel de Administrador');
+
+            $template->addBlockfile("CONTENTS", "ADMINSECTION", "admin.html");
+            $template->setCurrentBlock("ADMINSECTION");
+
+            $template->addBlockfile("SECTION", "SECTION", "default-admin.html");
+            $template->touchBlock("SECTION");
+
+            $template->parseCurrentBlock("ADMINSECTION");
             // cargar template de admin
         }
         else {

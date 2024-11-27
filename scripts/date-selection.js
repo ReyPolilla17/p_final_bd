@@ -1,7 +1,7 @@
 function updateDaysAviable() {
-    var day = document.querySelector("#day"); // El día seleccionado
-    var month = document.querySelector("#month"); // El mes seleccionao
-    var year = document.querySelector("#year"); // El año introducido
+    var day = document.getElementById("day"); // El día seleccionado
+    var month = document.getElementById("month"); // El mes seleccionao
+    var year = document.getElementById("year"); // El año introducido
 
     var curYear = new Date().getFullYear(); // El año actual
     var maxDay = new Date(year.value, month.value, 0).getDate(); // Obtiene el último día del mes seleccionado
