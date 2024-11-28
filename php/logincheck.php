@@ -13,7 +13,11 @@
 
     if($line = mysqli_fetch_assoc($result)) {
         print("1");
+        
+        mysqli_free_result($result);
     } else {
         print('0');
     }
+
+    @mysqli_close($link);
 ?>

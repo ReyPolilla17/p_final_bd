@@ -14,10 +14,14 @@
 
     if($line = mysqli_fetch_assoc($result)) {
         print('0');
+        
+        mysqli_free_result($result);
     } else {
         $reg_query = "INSERT INTO b_cuentas (usuario, contrasena, nacimiento, creacion) VALUES ('$user', '$pass', '$date', CURDATE())";
         mysqli_query($link, $reg_query);
         
         print('1');
     }
+
+    @mysqli_close($link);
 ?>

@@ -25,10 +25,10 @@
         if($line['admin_p']) {    
             $template->setVariable("SECTION_NAME", 'Panel de Administrador');
 
-            $template->addBlockfile("CONTENTS", "ADMINSECTION", "admin.html");
+            $template->addBlockfile("CONTENTS", "ADMINSECTION", "./admin/admin.html");
             $template->setCurrentBlock("ADMINSECTION");
 
-            $template->addBlockfile("SECTION", "SECTION", "default-admin.html");
+            $template->addBlockfile("SECTION", "SECTION", "./admin/default-admin.html");
             $template->touchBlock("SECTION");
 
             $template->parseCurrentBlock("ADMINSECTION");
@@ -38,9 +38,13 @@
             $template->setVariable("SECTION_NAME", 'El Archivo del Diodo');
             // cargar template de usuario
         }
+
+        mysqli_free_result($result);
     } else {
         print("<h1>Como llegaste hasta aqui?</h1>");
     }
 
     $template->show();
+
+    @mysqli_close($link);
 ?>

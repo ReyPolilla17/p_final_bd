@@ -1,0 +1,43 @@
+<div class="section-title">
+    <h1>Gestión de Libros</h1>
+</div>
+
+<div class="top-part">
+    <div class="search-wrapper">
+        <div class="search-item">
+            <input type="text" name="book-search" id="book-search" placeholder="Buscar Libros">
+            <label for="book-search">Buscar Libros</label>
+        </div>
+
+        <div class="search-item">
+            <select name="book-search-options" id="book-search-options">
+                <option value="1">Nombre</option>
+                <option value="2">Autor</option>
+                <option value="3">Género</option>
+                <option value="4">Editorial</option>
+                <option value="5">ID Libro</option>
+            </select>
+            <label for="book-search-options">Buscar Por</label>
+        </div>
+    </div>
+    {ADMIN_ADD}
+</div>
+
+<div class="collection-wrapper">
+    <!-- BEGIN BOOK -->
+    <div class="collection-book">
+        <div class="image-wrapper">
+            <img src="./media/dynamic/books/{LINK}" alt="Book Image">
+        </div>
+    
+        <p>{TITLE}</p>
+    
+        <p>{AUTHOR}</p>
+        <p>{EDITORIAL}</p>
+        <p>{AVIABLE}</p>
+    
+        <p>{RATING}</p>
+        <p>{RESUME}</p>
+    </div>
+    <!-- END BOOK -->
+</div>

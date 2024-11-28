@@ -2,7 +2,7 @@ function selectItem(item_id) {
     var user = document.getElementById("username-holder").value;
     var password = document.getElementById("password-holder").value;
 
-    var info = `user=${user}&password=${password}`;
+    var info = `username=${user}&password=${password}`;
     var dir = "./php/error.php";
 
     var nav_bar = document.querySelector(".nav-bar");

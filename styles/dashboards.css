@@ -64,9 +64,11 @@
 }
 
 .content-wrapper {
+    position: absolute;
+    height: 100%;
+    width: 100%;
     display: grid;
     grid-template-columns: 0.2fr 1fr;
-    height: 600px;
 }
 
 .content-wrapper > .nav-bar-wrapper {
@@ -155,4 +157,22 @@
 
 .section-wrapper a:hover {
     text-decoration: underline;
+}
+
+.content-wrapper > .section-wrapper > .collection-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 20px;
+}
+
+.collection-book {
+    border-radius: 20px;
+    border: 3px solid red;
+    width: 60%;
+}
+
+.collection-book > .image-wrapper {
+    overflow: hidden;
+    height: 60%;
+    width: 30;
 }
