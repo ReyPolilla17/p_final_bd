@@ -13,8 +13,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="./styles/common.css">
-    <link rel="stylesheet" href="./styles/vertical-screen.css">
     <link rel="stylesheet" href="./styles/dashboards.css">
+    <link rel="stylesheet" href="./styles/dashboards-vertical-screen.css">
 
     <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 	<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
@@ -39,14 +39,19 @@
             <div class="user-image">
                 <img src="./media/dynamic/users/{U_IMAGE}" alt="User Image">
             </div>
-            <div class="user-name">
-                {USERNAME}
+            <div class="my-user-wrapper">
+                <div class="user-name">
+                    <h1>{USERNAME}</h1>
+                </div>
+                <div class="user-edition" onclick="selectItem('my-user')">
+                    <i class="fa-solid fa-user"></i>
+                    Mi perfil
+                </div>
             </div>
         </div>
         <div class="logout">
             <a href="./index.html">
-                <span>Cerrar sesion</span>
-                
+                Cerrar sesion
                 <i class="fa-solid fa-right-from-bracket"></i>
             </a>
         </div>

@@ -6,7 +6,6 @@ function selectItem(item_id) {
     var dir = "./php/error.php";
 
     var nav_bar = document.querySelector(".nav-bar");
-    var profile = document.querySelector(".profile-settings");
 
     for(const child of nav_bar.children) {
         if(item_id !== child.id) {
@@ -14,12 +13,6 @@ function selectItem(item_id) {
         } else if(!child.className.includes('selected')) {
             child.className = `${child.className} selected`;
         }
-    }
-    
-    if(item_id !== profile.id) {
-        profile.className = "profile-settings";
-    } else if(!profile.className.includes('selected')) {
-        profile.className = `${profile.className} selected`;
     }
 
     switch(item_id) {
@@ -50,6 +43,8 @@ function selectItem(item_id) {
 
 function displayContent(result, status, xhr) {
     $("#section-start").html(result);
+    
+    window.location.href = "#section-start";
 }
 
 function eFnction(xhr, status, error) {

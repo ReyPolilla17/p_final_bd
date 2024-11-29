@@ -26,18 +26,17 @@
 <div class="collection-wrapper">
     <!-- BEGIN BOOK -->
     <div class="collection-book">
-        <div class="image-wrapper">
-            <img src="./media/dynamic/books/{LINK}" alt="Book Image">
+        <div class="image-wrapper" style="background-image: url('./media/dynamic/books/{IMAGE}');"></div>
+
+        <div class="info-wrapper">
+            <h3>{TITLE}</h3>
+            <p>{AUTHOR}</p>
+            <p>{GENRE}</p>
+            <p>Editorial: {EDITORIAL}</p>
+            <p>{RATING}</p>
+            <p>{AVAILABLE}</p>
+            <p>{SUMMARY}</p>
         </div>
-    
-        <p>{TITLE}</p>
-    
-        <p>{AUTHOR}</p>
-        <p>{EDITORIAL}</p>
-        <p>{AVIABLE}</p>
-    
-        <p>{RATING}</p>
-        <p>{RESUME}</p>
     </div>
     <!-- END BOOK -->
 </div>

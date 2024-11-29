@@ -38,19 +38,23 @@
     width: inherit;
 }
 
-.user-wrapper > .user-profile > .user-name {
+.user-wrapper > .user-profile > .my-user-wrapper {
     padding-left: 20px;
-    font-size: 1.3em;
+}
+
+.user-wrapper > .user-profile > .my-user-wrapper > .user-edition {
+    padding-top: 5px;
+    transition: 0.3s;
+}
+
+.user-wrapper > .user-profile > .my-user-wrapper > .user-edition:hover {
+    color: #A49966;
 }
 
 .user-wrapper > .logout {
     display: flex;
     align-items: center;
     font-size: 1.5em;
-}
-
-.user-wrapper > .logout span {
-    padding-right: 10px;
 }
 
 .user-wrapper > .logout a {
@@ -69,6 +73,7 @@
     width: 100%;
     display: grid;
     grid-template-columns: 0.2fr 1fr;
+    color: #302727;
 }
 
 .content-wrapper > .nav-bar-wrapper {
@@ -99,29 +104,6 @@
 }
 
 .content-wrapper > .nav-bar-wrapper > .nav-bar > .nav-bar-item:hover {
-    background-color: #73693B;
-}
-
-.content-wrapper > .nav-bar-wrapper > .profile-settings {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.5em;
-    font-weight: bolder;
-    background-color: #A49966;
-    padding: 20px;
-    border-top: 2px solid #73693B;
-}
-
-.content-wrapper > .nav-bar-wrapper > .selected {
-    background-color: #73693B;
-}
-
-.content-wrapper > .nav-bar-wrapper > .profile-settings i {
-    padding-right: 20px;
-}
-
-.content-wrapper > .nav-bar-wrapper > .profile-settings:hover {
     background-color: #73693B;
 }
 
@@ -166,13 +148,29 @@
 }
 
 .collection-book {
+    display: flex;
+    flex-direction: column;
     border-radius: 20px;
-    border: 3px solid red;
-    width: 60%;
+    border: 3px solid #4A3D3D;
+    min-height: fit-content;
+    transition: 0.3s;
+}
+
+.collection-book:hover {
+    cursor: pointer;
+    border-color: #73693B;
+    /* box-shadow: 0 20px 20px rgba(0, 0, 0, 0.1); */
 }
 
 .collection-book > .image-wrapper {
-    overflow: hidden;
-    height: 60%;
-    width: 30;
+    z-index: -1;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 20em;
+    border-radius: 10px 10px 0 0;
+}
+
+.collection-book > .info-wrapper {
+    padding: 10px;
 }

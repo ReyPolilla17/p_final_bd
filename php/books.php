@@ -28,24 +28,33 @@
 
             while($l = mysqli_fetch_assoc($books_result)) {
                 $rating = $l['rating'];
+                $available = $l['disponibles'];
 
-                if(!$rating) {
-                    $rating = 'N/A';
+                if($rating) {
+                    $rating = "Calificación: $rating";
+                } else {
+                    $rating = "Sin Calificaciones";
+                }
+
+                if($available) {
+                    $available = "$available disponibles";
+                } else {
+                    $available = "Sin disponibilidad.";
                 }
 
                 $template->setCurrentBlock("BOOK");
 
-                $template->setVariable("LINK", $l['imagen']);
+                $template->setVariable("IMAGE", $l['imagen']);
                 $template->setVariable("TITLE", $l['libro']);
                 // $template->setVariable("AUTHOR", $l['nombre']);
+                // $template->setVariable("GENRE", $l['nombre']);
                 $template->setVariable("EDITORIAL", $l['editorial']);
-                $template->setVariable("AVIABLE", $l['disponibles']);
-                $template->setVariable("RATING", $rating);
-                $template->setVariable("RESUME", $l['resumen']);
+                $template->setVariable("AVAILABLE", $available);
+                $template->setVariable("RATING", "$rating");
+                $template->setVariable("SUMMARY", $l['resumen']);
 
 
                 $template->parseCurrentBlock("BOOK");
-                // $template->setVariable("TITLE", $line['nombre']);
             }
 
             $template->setCurrentBlock("COLLECTION_ITEM");
