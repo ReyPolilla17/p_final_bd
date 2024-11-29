@@ -10,62 +10,112 @@
             
     $template = new HTML_Template_ITX('../templates');
     
-    $query = "SELECT * FROM b_cuentas WHERE usuario = '$user' AND contrasena = '$pass' LIMIT 1";
+    $query_users = "SELECT * FROM b_cuentas WHERE usuario = '$user' AND contrasena = '$pass' LIMIT 1";
     
-    $result = mysqli_query($link, $query);
+    $result_users = mysqli_query($link, $query_users);
     
-    if($line = mysqli_fetch_assoc($result)) {
+    if($line_users = mysqli_fetch_assoc($result_users)) {
         $template->loadTemplatefile("books.html", true, true);
 
-        if($line['admin_p']) {
+        if($line_users['admin_p']) {
+            $template->setVariable("BOOKS_SECTION", "Gestión de Libros");
             $template->addBlockfile("ADMIN_ADD", "ADMIN_SECTION", "./admin/add-book.html");
             $template->touchBlock("ADMIN_SECTION");
+        } else {
+            $template->setVariable("BOOKS_SECTION", "Busca Libros");
+            // print("AAA");
+        }
 
-            $books_query = "SELECT * FROM v_libros_general";
-            $books_result = mysqli_query($link, $books_query);
+        $i = 0;
 
-            $i = 1;
+        $query_books = "SELECT * FROM v_libros_general";
+        $result_books = mysqli_query($link, $query_books);
 
-            while($l = mysqli_fetch_assoc($books_result)) {
-                $rating = $l['rating'];
-                $available = $l['disponibles'];
+        while($line_books = mysqli_fetch_assoc($result_books)) {
+            $j = 0;
 
-                if($rating) {
-                    $rating = "Calificación: $rating";
-                } else {
-                    $rating = "Sin Calificaciones";
-                }
+            $book_id = $line_books['id_libro'];
 
-                if($available) {
-                    $available = "$available disponibles";
-                } else {
-                    $available = "Sin disponibilidad.";
-                }
+            $rating = $line_books['rating'];
+            $available = $line_books['disponibles'];
+            $authors = "Sin autores registrados";
 
-                $template->setCurrentBlock("BOOK");
-
-                $template->setVariable("IMAGE", $l['imagen']);
-                $template->setVariable("TITLE", $l['libro']);
-                // $template->setVariable("AUTHOR", $l['nombre']);
-                // $template->setVariable("GENRE", $l['nombre']);
-                $template->setVariable("EDITORIAL", $l['editorial']);
-                $template->setVariable("AVAILABLE", $available);
-                $template->setVariable("RATING", "$rating");
-                $template->setVariable("SUMMARY", $l['resumen']);
-
-
-                $template->parseCurrentBlock("BOOK");
+            if($rating) {
+                $rating = "Calificación: $rating";
+            } else {
+                $rating = "Sin Calificaciones";
             }
 
-            $template->setCurrentBlock("COLLECTION_ITEM");
-            $template->parseCurrentBlock("ADMINSECTION");
-        } else {
-            // $template->setVariable("COLLECTION_ITEM", 'Panel de Usuario');
-            print("AAA");
+            if(!$available) {
+                $available = "Sin disponibilidad.";
+            } else if($available == 1) {
+                $available = "$available disponible";
+            } else {
+                $available = "$available disponibles";
+            }
 
+            $template->setCurrentBlock("BOOKS");
+
+            $template->setVariable("IMAGE", $line_books['imagen']);
+            $template->setVariable("TITLE", $line_books['libro']);
+            $template->setVariable("EDITORIAL", $line_books['editorial']);
+            $template->setVariable("AVAILABLE", $available);
+            $template->setVariable("RATING", "$rating");
+            $template->setVariable("SUMMARY", $line_books['resumen']);
+
+            $query_authors = "SELECT * FROM v_libros_autores WHERE id_libro = '$book_id'";
+            $result_authors = mysqli_query($link, $query_authors);
+
+            while($line_authors = mysqli_fetch_assoc($result_authors)) {
+                $author = $line_authors['autor'];
+
+                if(!$j) {
+                    $authors = $author;
+                } else {
+                    $authors = "$authors, $author";
+                }
+
+                $j++;
+            }
+
+            $template->setVariable("AUTHOR", $authors);
+
+            if($j) {
+                mysqli_free_result($result_authors);
+            }
+            
+            $j = 0;
+
+            $query_genres = "SELECT * FROM v_libros_generos WHERE id_libro = '$book_id'";
+            $result_genres = mysqli_query($link, $query_genres);
+
+            while($line_genres = mysqli_fetch_assoc($result_genres)) {
+                $template->setCurrentBlock("GENRES");
+
+                $template->setVariable("GENRE", $line_genres['genero']);
+
+                $template->parseCurrentBlock("GENRES");
+
+                $j++;
+            }
+
+            if($j) {
+                mysqli_free_result($result_genres);
+            }
+            
+            $template->setCurrentBlock("BOOKS");
+            $template->parseCurrentBlock("BOOKS");
+
+            $i++;
+        }
+
+        if(!$i) {
+            print("No hay nada");
+        } else {
+            mysqli_free_result($result_books);
         }
         
-        mysqli_free_result($result);
+        mysqli_free_result($result_users);
     } else {
         print("LMAO");
     }

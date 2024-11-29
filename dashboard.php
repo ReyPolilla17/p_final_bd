@@ -32,7 +32,6 @@
             $template->touchBlock("SECTION");
 
             $template->parseCurrentBlock("ADMINSECTION");
-            // cargar template de admin
         }
         else {
             $template->setVariable("SECTION_NAME", 'El Archivo del Diodo');

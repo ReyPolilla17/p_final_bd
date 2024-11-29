@@ -176,3 +176,12 @@
 .collection-book > .info-wrapper {
     padding: 10px;
 }
+
+.collection-book > .info-wrapper > .genre-wrapper span {
+    background-color: #438E36;
+    color: white;
+    padding: 5px;
+    line-height: 30px;
+    border-radius: 10px;
+    max-width: max-content;
+}

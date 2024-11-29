@@ -51,7 +51,7 @@ function validateLogin() {
             url: './php/logincheck.php',
             dataType: 'html',
             type: 'POST',
-            async: true,
+            async: false,
             data: `username=${username}&password=${password}`,
             success: function(result, status, xhr) { 
                 if(parseInt(result) === 0) {
@@ -180,7 +180,7 @@ function validateRegister() {
             url: './php/registercheck.php',
             dataType: 'html',
             type: 'POST',
-            async: true,
+            async: false,
             data: `username=${username}&password=${password}&date=${year}-${month}-${day}`,
             success: function(result, status, xhr) { 
                 if(parseInt(result) === 0) {
