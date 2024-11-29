@@ -60,7 +60,8 @@
             $template->setCurrentBlock("COLLECTION_ITEM");
             $template->parseCurrentBlock("ADMINSECTION");
         } else {
-            $template->setVariable("COLLECTION_ITEM", 'Panel de Usuario');
+            // $template->setVariable("COLLECTION_ITEM", 'Panel de Usuario');
+            print("AAA");
 
         }
         

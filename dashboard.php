@@ -25,8 +25,8 @@
         if($line['admin_p']) {    
             $template->setVariable("SECTION_NAME", 'Panel de Administrador');
 
-            $template->addBlockfile("CONTENTS", "ADMINSECTION", "./admin/admin.html");
-            $template->setCurrentBlock("ADMINSECTION");
+            $template->addBlockfile("NAV_BAR", "ADMIN_BAR", "./admin/admin-nav-bar.html");
+            $template->touchBlock("ADMIN_BAR");
 
             $template->addBlockfile("SECTION", "SECTION", "./admin/default-admin.html");
             $template->touchBlock("SECTION");
@@ -36,6 +36,9 @@
         }
         else {
             $template->setVariable("SECTION_NAME", 'El Archivo del Diodo');
+
+            $template->addBlockfile("NAV_BAR", "USER_BAR", "./user/user-nav-bar.html");
+            $template->touchBlock("USER_BAR");
             // cargar template de usuario
         }
 

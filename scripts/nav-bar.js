@@ -5,7 +5,7 @@ function selectItem(item_id) {
     var info = `username=${user}&password=${password}`;
     var dir = "./php/error.php";
 
-    var nav_bar = document.querySelector(".nav-bar");
+    var nav_bar = document.querySelector(".nav-bar-wrapper");
 
     for(const child of nav_bar.children) {
         if(item_id !== child.id) {
@@ -24,6 +24,18 @@ function selectItem(item_id) {
             break;
         case "stats":
             dir = "./php/stats.php";
+            break;
+        case "loans":
+            dir = "./php/loans.php";
+            break;
+        case "friends":
+            dir = "./php/friends.php";
+            break;
+        case "recomendations":
+            dir = "./php/recomendations.php";
+            break;
+        case "lists":
+            dir = "./php/lists.php";
             break;
         case "my-user":
             dir = "./php/my-user.php";
