@@ -1,3 +1,3 @@
 <?php
-    print("FFF");
+    print("FFF"); // missing template
 ?>

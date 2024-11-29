@@ -1,3 +1,3 @@
 <?php
-    print("GGG");
+    print("GGG"); // missing template
 ?>

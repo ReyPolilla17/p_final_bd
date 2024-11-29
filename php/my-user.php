@@ -1,4 +1,3 @@
 <?php
-// get all user info from a query
-    print("DDD");
+    print("DDD"); // missing template
 ?>
