@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>{SECTION_NAME}</title>
+
+    <link rel="shortcut icon" href="./media/logos/favicon.ico" type="image/x-icon">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="./styles/common.css">
+    <link rel="stylesheet" href="./styles/vertical-screen.css">
+    <link rel="stylesheet" href="./styles/dashboards.css">
+
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+	<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+    
+    <script src="https://kit.fontawesome.com/9e78df03eb.js" crossorigin="anonymous"></script>
+
+    <script src="./scripts/nav-bar.js" defer></script>
+</head>
+<body>
+    <input id="username-holder" type="hidden" name="username" value="{USERNAME}">
+    <input id="password-holder" type="hidden" name="password" value="{PASSWORD}">
+    <div class="header-wrapper">
+        <div class="logo-wrapper">
+            <img src="./media/logos/logo.png" alt="Logo">
+        </div>
+        <div class="title-wrapper">
+            <h1>{SECTION_NAME}</h1>
+        </div>
+    </div>
+    <div class="user-wrapper">
+        <div class="user-profile">
+            <div class="user-image">
+                <img src="./media/dynamic/users/{U_IMAGE}" alt="User Image">
+            </div>
+            <div class="user-name">
+                {USERNAME}
+            </div>
+        </div>
+        <div class="logout">
+            <a href="./index.html">
+                <span>Cerrar sesion</span>
+                
+                <i class="fa-solid fa-right-from-bracket"></i>
+            </a>
+        </div>
+    </div>
+    <div class="content-wrapper" id="content-start">
+        <div class="nav-bar-wrapper">
+            <div class="nav-bar">
+                <div class="nav-bar-item" id="books" onclick="selectItem(this.id)">
+                     <span>Libros</span>
+                     <i class="fa-solid fa-book"></i>
+                    </div>
+                <div class="nav-bar-item" id="users" onclick="selectItem(this.id)">
+                    <span>Usuarios</span>
+                    <i class="fa-solid fa-users"></i>
+                </div>
+                <div class="nav-bar-item" id="stats" onclick="selectItem(this.id)">
+                    <span>Análisis</span>
+                    <i class="fa-solid fa-chart-line"></i>
+                </div>
+            </div>
+            <div class="profile-settings" id="my-user" onclick="selectItem(this.id)">
+                <i class="fa-solid fa-user"></i>
+                Mi Perfil
+            </div>
+        </div>
+        <div class="section-wrapper" id="section-start">
+            <div class="section-title">
+                <h1>Gestión de Libros</h1>
+            </div>
+            
+            <div class="top-part">
+                <div class="search-wrapper">
+                    <div class="search-item">
+                        <input type="text" name="book-search" id="book-search" placeholder="Buscar Libros">
+                        <label for="book-search">Buscar Libros</label>
+                    </div>
+            
+                    <div class="search-item">
+                        <select name="book-search-options" id="book-search-options">
+                            <option value="1">Nombre</option>
+                            <option value="2">Autor</option>
+                            <option value="3">Género</option>
+                            <option value="4">Editorial</option>
+                            <option value="5">ID Libro</option>
+                        </select>
+                        <label for="book-search-options">Buscar Por</label>
+                    </div>
+                </div>
+                {ADMIN_ADD}
+            </div>
+            
+            <div class="collection-wrapper">
+                <!-- BEGIN BOOK -->
+                <div class="collection-book">
+                    <div class="image-wrapper" style="background-image: url('./media/dynamic/books/default.jpg');">
+                        <!-- <img src="./media/dynamic/books/default.jpg" alt="Book Image"> -->
+                    </div>
+
+                    <div class="info-wrapper">
+                        <h3>{TITLE}</h3>
+                        <p>{AUTHOR}</p>
+                        <p>{GENRE}</p>
+                        <p>Editorial: {EDITORIAL}</p>
+                        <p>Sin Calificaciones</p>
+                        <p>Sin disponibilidad</p>
+                        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nulla velit esse nesciunt iusto accusamus tempore eaque, quo alias nihil modi necessitatibus consequatur ad excepturi nisi ratione quod molestias consequuntur unde!</p>
+                    </div>
+                
+                </div>
+                <div class="collection-book">
+                    <div class="image-wrapper" style="background-image: url('./media/dynamic/books/default.jpg');">
+                        <!-- <img src="./media/dynamic/books/default.jpg" alt="Book Image"> -->
+                    </div>
+
+                    <div class="info-wrapper">
+                        <h3>{TITLE}</h3>
+                        <p>{AUTHOR}</p>
+                        <p>{GENRE}</p>
+                        <p>Editorial: {EDITORIAL}</p>
+                        <p>Calificación: {RATING}</p>
+                        <p>{AVAILABE} disponibles</p>
+                        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nulla velit esse nesciunt iusto accusamus tempore eaque, quo alias nihil modi necessitatibus consequatur ad excepturi nisi ratione quod molestias consequuntur unde!</p>
+                    </div>
+                
+                </div>
+                <div class="collection-book">
+                    <div class="image-wrapper" style="background-image: url('./media/dynamic/books/{IMAGE}');"></div>
+
+                    <div class="info-wrapper">
+                        <h3>{TITLE}</h3>
+                        <p>{AUTHOR}</p>
+                        <p>{GENRE}</p>
+                        <p>Editorial: {EDITORIAL}</p>
+                        <p>{RATING}</p>
+                        <p>{AVAILABE}</p>
+                        <p>{SUMMARY}</p>
+                    </div>
+                </div>
+                <div class="collection-book">
+                    <div class="image-wrapper" style="background-image: url('./media/dynamic/books/default.jpg');">
+                        <!-- <img src="./media/dynamic/books/default.jpg" alt="Book Image"> -->
+                    </div>
+
+                    <div class="info-wrapper">
+                        <h3>{TITLE}</h3>
+                        <p>{AUTHOR}</p>
+                        <p>{GENRE}</p>
+                        <p>Editorial: {EDITORIAL}</p>
+                        <p>Calificación: {RATING}</p>
+                        <p>{AVAILABE} disponibles</p>
+                        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nulla velit esse nesciunt iusto accusamus tempore eaque, quo alias nihil modi necessitatibus consequatur ad excepturi nisi ratione quod molestias consequuntur unde!</p>
+                    </div>
+                
+                </div>
+                <div class="collection-book">
+                    <div class="image-wrapper" style="background-image: url('./media/dynamic/books/default.jpg');">
+                        <!-- <img src="./media/dynamic/books/default.jpg" alt="Book Image"> -->
+                    </div>
+
+                    <div class="info-wrapper">
+                        <h3>{TITLE}</h3>
+                        <p>{AUTHOR}</p>
+                        <p>{GENRE}</p>
+                        <p>Editorial: {EDITORIAL}</p>
+                        <p>Calificación: {RATING}</p>
+                        <p>{AVAILABE} disponibles</p>
+                        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nulla velit esse nesciunt iusto accusamus tempore eaque, quo alias nihil modi necessitatibus consequatur ad excepturi nisi ratione quod molestias consequuntur unde!</p>
+                    </div>
+                
+                </div>
+                
+                <!-- END BOOK -->
+            </div>
+        </div>
+    </div>
+</body>
+</html>
