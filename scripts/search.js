@@ -1,13 +1,14 @@
 function searchBook() {
-    var user = document.getElementById("username-holder").value;
-    var password = document.getElementById("password-holder").value;
+    var user = document.getElementById("username-holder").value; // información del ususario
+    var password = document.getElementById("password-holder").value; // información del ususario
 
-    var search = document.getElementById("book-search").value;
-    var atribute = parseInt(document.getElementById("book-search-options").value);
+    var search = document.getElementById("book-search").value; // el valor a buscar
+    var atribute = parseInt(document.getElementById("book-search-options").value); // el filtro de búsqueda
 
-    var info = `username=${user}&password=${password}&search=${search}&atribute=${atribute}`;
-    var dir = "./php/search-books.php";
+    var info = `username=${user}&password=${password}&search=${search}&atribute=${atribute}`; // información a enviar
+    var dir = "./php/search-books.php"; // archivo a ejecutar
 
+    // ejecuta el archivo
     $.ajax({
         url: dir,
 		dataType: 'html',
@@ -20,5 +21,5 @@ function searchBook() {
 }
 
 function displayBooks(result, status, xhr) {
-    $("#book-list").html(result);
+    $("#book-list").html(result); // muestra los resultados de la búsqueda
 }

@@ -1,20 +1,24 @@
 function selectItem(item_id) {
-    var user = document.getElementById("username-holder").value;
-    var password = document.getElementById("password-holder").value;
+    var user = document.getElementById("username-holder").value; //información del usuario
+    var password = document.getElementById("password-holder").value; // información del usuario
 
-    var info = `username=${user}&password=${password}`;
-    var dir = "./php/error.php";
+    var info = `username=${user}&password=${password}`; // elementos a enviar
+    var dir = "./php/error.php"; // código php que se mandará
 
-    var nav_bar = document.querySelector(".nav-bar-wrapper");
+    var nav_bar = document.querySelector(".nav-bar-wrapper"); // manú de opciones
 
-    for(const child of nav_bar.children) {
+    var run_php = false; // para evitar enviar solicitudes si el elemento ya está seleccionado
+
+    for(const child of nav_bar.children) { // para cada elemento del menu de opciones
         if(item_id !== child.id) {
-            child.className = "nav-bar-item";
+            child.className = "nav-bar-item"; // si no es el elemento seleccionado, le elimina el estilo de seleccionado
         } else if(!child.className.includes('selected')) {
-            child.className = `${child.className} selected`;
+            child.className = `${child.className} selected`; // si el elemento seleccionado no está ya seleccionado
+            run_php = true; // realizará la solicitud
         }
     }
 
+    // establece la ruta del php según el elemento seleccionado
     switch(item_id) {
         case "books":
             dir = "./php/books.php";
@@ -39,24 +43,27 @@ function selectItem(item_id) {
             break;
         case "my-user":
             dir = "./php/my-user.php";
+            run_php = true; // necesario porque no está en la nav-bar
             break;
     }
 
-    $.ajax({
-        url: dir,
-		dataType: 'html',
-		type: 'POST',
-		async: true,
-		data: info,
-		success: displayContent,
-		error: eFnction
-    });
+    if(run_php) { // si se debe ejecutar, ejecuta el ajax
+        $.ajax({
+            url: dir,
+            dataType: 'html',
+            type: 'POST',
+            async: true,
+            data: info,
+            success: displayContent,
+            error: eFnction
+        });
+    }
 }
 
 function displayContent(result, status, xhr) {
-    $("#section-start").html(result);
+    $("#section-start").html(result); // muestra el resultado de la ejecución del php
     
-    window.location.href = "#section-start";
+    window.location.href = "#section-start"; // redirige al inicio de la página 
 }
 
 function eFnction(xhr, status, error) {
