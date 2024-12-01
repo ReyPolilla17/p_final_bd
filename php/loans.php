@@ -18,16 +18,23 @@
     $result_users = mysqli_query($link, $query_users);
 
     if($line_users = mysqli_fetch_assoc($result_users)) { // Si el usuario existe
-        $user_id = $line_users['id_cuenta'];
+        $this_user_id = $line_users['id_cuenta'];
         $template->loadTemplatefile("loans.html", true, true);
 
-        $query_loans = "SELECT * FROM v_libros_reservaciones WHERE id_cuenta = $user_id";
+        $query_loans = "SELECT * FROM v_libros_reservaciones";
+        
+        if(!$line_users['admin_p']) {
+            $query_loans = "$query_loans WHERE id_cuenta = $this_user_id";
+        }
+
         $result_loans = mysqli_query($link, $query_loans);
 
         $i = 0;
 
         while($line_loans = mysqli_fetch_assoc($result_loans)) {
             $book_id = $line_loans['id_libro'];
+            $user_id = $line_loans['id_cuenta'];
+
             $has_active = 0;
             $has_inactive = 0;
 
@@ -66,6 +73,19 @@
                 $has_active = 1;
 
                 $template->setCurrentBlock("ACTIVE");
+            }
+
+            if($line_users['admin_p']) {
+                $query_user = "SELECT * FROM b_cuentas WHERE id_cuenta = $user_id LIMIT 1";
+                $result_user = mysqli_query($link, $query_user);
+
+                if($line_user = mysqli_fetch_assoc($result_user)) {
+                    $template->setVariable("USER", $line_user['usuario']);
+                    
+                    mysqli_free_result($result_user);
+                } else {
+                    $template->setVariable("USER", "Usuario no encontrado");
+                }
             }
             
             $template->setVariable("TITLE", $line_loans['nombre']);
