@@ -71,6 +71,7 @@
             // $template->addBlockfile("COLLECTION", "BOOK_COLLECTION", "./collections/book-collection.html");
             $template->setCurrentBlock("BOOKS");
 
+            $template->setVariable("ID", $book_id);
             $template->setVariable("IMAGE", $line_result['imagen']);
             $template->setVariable("TITLE", $line_result['libro']);
             $template->setVariable("EDITORIAL", $line_result['editorial']);
@@ -109,7 +110,7 @@
 
                 $template->setVariable("GENRE", $line_genres['genero']);
 
-                $template->parseCurrentBlock("GENRES");
+                $template->parseCurrentBlock();
 
                 $j++;
             }
@@ -119,7 +120,7 @@
             }
             
             $template->setCurrentBlock("BOOKS");
-            $template->parseCurrentBlock("BOOKS");
+            $template->parseCurrentBlock();
 
             $i++;
         }
@@ -127,7 +128,7 @@
         if($i) {
             mysqli_free_result($search_result);
         } else {
-            print("No se encontraron libros");
+            print("No se encontraron libros"); // missing template
         }
 
 
@@ -139,4 +140,3 @@
     $template->show();
     @mysqli_close($link);
 ?>
-

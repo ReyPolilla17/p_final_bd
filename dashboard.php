@@ -31,7 +31,7 @@
             $template->addBlockfile("SECTION", "SECTION", "./admin/default-admin.html");
             $template->touchBlock("SECTION");
 
-            $template->parseCurrentBlock("ADMINSECTION");
+            $template->parseCurrentBlock();
         }
         else {
             $template->setVariable("SECTION_NAME", 'El Archivo del Diodo');
@@ -82,6 +82,7 @@
                 $template->setCurrentBlock("BOOKS");
 
                 // coloca toda la información del libro
+                $template->setVariable("ID", $book_id);
                 $template->setVariable("IMAGE", $line_books['imagen']);
                 $template->setVariable("TITLE", $line_books['libro']);
                 $template->setVariable("EDITORIAL", $line_books['editorial']);
@@ -126,7 +127,7 @@
 
                     $template->setVariable("GENRE", $line_genres['genero']);
 
-                    $template->parseCurrentBlock("GENRES");
+                    $template->parseCurrentBlock();
 
                     $j++;
                 }
@@ -138,7 +139,7 @@
                 
                 // regresa al bloque anterior y lo muestra
                 $template->setCurrentBlock("BOOKS");
-                $template->parseCurrentBlock("BOOKS");
+                $template->parseCurrentBlock();
 
                 $i++;
             }

@@ -5,6 +5,7 @@
     // trata todas las cadenas recibidas mediante el post
     $user = implode("\'", explode("'", implode("\\\\", explode("\\", $_POST['username']))));
     $pass = implode("\'", explode("'", implode("\\\\", explode("\\", $_POST['password']))));
+    $id = implode("\'", explode("'", implode("\\\\", explode("\\", $_POST['id']))));
 
     // se conecta a la base de datos
     $link = mysqli_connect($cfgServer['host'], $cfgServer['user'], $cfgServer['password']);
@@ -18,37 +19,35 @@
     $result_users = mysqli_query($link, $query_users);
 
     if($line_users = mysqli_fetch_assoc($result_users)) { // Si el usuario existe
-        // carga la plantilla de libros
-        $template->loadTemplatefile("books.html", true, true);
+        // carga la plantilla del libro
+        $template->loadTemplatefile("book-info.html", true, true);
         
         if($line_users['admin_p']) { // si el usuario es administrador
-            $template->setVariable("BOOKS_SECTION", "Gestión de Libros"); // cambia el titulo de la sección
+            // $template->setVariable("BOOKS_SECTION", "Gestión de Libros"); // cambia el titulo de la sección
             
-            // agrega la opción de agregar libros
-            $template->addBlockfile("ADMIN_ADD", "ADMIN_SECTION", "./admin/add-book.html");
-            $template->touchBlock("ADMIN_SECTION");
+            // // agrega la opción de agregar libros
+            // $template->addBlockfile("ADMIN_ADD", "ADMIN_SECTION", "./admin/add-book.html");
+            // $template->touchBlock("ADMIN_SECTION");
+            // Opciones de administrador!!!
         } else {
-            $template->setVariable("BOOKS_SECTION", "Busca Libros"); // cambia el título de la sección
+            // $template->setVariable("BOOKS_SECTION", "Busca Libros"); // cambia el título de la sección
+            // Opciones de usuario!!!
         }
         
         // carga el archivo que contriene el formato para presentar libros
-        $template->addBlockfile("COLLECTION", "BOOK_COLLECTION", "./collections/book-collection.html");
-
-        $i = 0;
 
         // obtiene la información de los libros en la base de datos
-        $query_books = "SELECT * FROM v_libros_general";
-        $result_books = mysqli_query($link, $query_books);
+        $query_book = "SELECT * FROM v_info_libro WHERE id_libro = $id LIMIT 1";
+        $result_book = mysqli_query($link, $query_book);
 
-        // para cada resultado del query
-        while($line_books = mysqli_fetch_assoc($result_books)) {
+        if($line_book = mysqli_fetch_assoc($result_book)) {
             $j = 0;
 
             // información que recibe un tratamiento esecífico
-            $book_id = $line_books['id_libro'];
+            $book_id = $line_book['id_libro'];
 
-            $rating = $line_books['rating'];
-            $available = $line_books['disponibles'];
+            $rating = $line_book['rating'];
+            $available = $line_book['disponibles'];
             $authors = "Sin autores registrados";
 
             // Como se muestran las calificaciones
@@ -67,16 +66,14 @@
                 $available = "$available disponibles";
             }
             
-            $template->setCurrentBlock("BOOKS");
-
             // coloca toda la información del libro
             $template->setVariable("ID", $book_id);
-            $template->setVariable("IMAGE", $line_books['imagen']);
-            $template->setVariable("TITLE", $line_books['libro']);
-            $template->setVariable("EDITORIAL", $line_books['editorial']);
+            $template->setVariable("IMAGE", $line_book['imagen']);
+            $template->setVariable("TITLE", $line_book['libro']);
+            $template->setVariable("EDITORIAL", $line_book['editorial']);
             $template->setVariable("AVAILABLE", $available);
             $template->setVariable("RATING", "$rating");
-            $template->setVariable("SUMMARY", $line_books['resumen']);
+            $template->setVariable("SUMMARY", $line_book['sinopsis']);
 
             // busca a los autores del libro
             $query_authors = "SELECT * FROM v_libros_autores WHERE id_libro = '$book_id'";
@@ -124,21 +121,14 @@
             if($j) {
                 mysqli_free_result($result_genres);
             }
-            
-            // regresa al bloque anterior y lo muestra
-            $template->setCurrentBlock("BOOKS");
+
             $template->parseCurrentBlock();
 
-            $i++;
+            mysqli_free_result($result_books); // libera memoria
+        } else {
+            print("No hay nada"); // missing template
         }
 
-        // si no hay libros en la base de datos
-        if(!$i) {
-            print("No hay nada"); // missing template
-        } else {
-            mysqli_free_result($result_books); // libera memoria
-        }
-        
         mysqli_free_result($result_users); // libera memoria
     } else {
         print("User verification error..."); // missing template

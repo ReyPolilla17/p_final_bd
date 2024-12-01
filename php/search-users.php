@@ -2,45 +2,35 @@
     require_once "HTML/Template/ITX.php";
     include './config.php';
 
-    // trata todas las cadenas recibidas mediante el post
     $user = implode("\'", explode("'", implode("\\\\", explode("\\", $_POST['username']))));
     $pass = implode("\'", explode("'", implode("\\\\", explode("\\", $_POST['password']))));
+    $search = implode("\'", explode("'", implode("\\\\", explode("\\", $_POST['search']))));
 
-    // se conecta a la base de datos
     $link = mysqli_connect($cfgServer['host'], $cfgServer['user'], $cfgServer['password']);
         mysqli_select_db($link, $cfgServer['dbname']);
-    
-    // carga las plantillas (creo)
+
     $template = new HTML_Template_ITX('../templates');
     
-    // Realiza un query vara verificar que el usuario exista
     $query_user = "SELECT * FROM b_cuentas WHERE usuario = '$user' AND contrasena = '$pass' LIMIT 1";
     $result_user = mysqli_query($link, $query_user);
-
-    if($line_user = mysqli_fetch_assoc($result_user)) { // Si el usuario existe
+    
+    if($line_user = mysqli_fetch_assoc($result_user)) {
         $this_user_id = $line_user['id_cuenta'];
-        $query_users = "SELECT * FROM b_cuentas WHERE id_cuenta != $this_user_id";
 
-        $template->loadTemplatefile("users.html");
+        $template->loadTemplatefile("./collections/user-collection.html", true, true);
 
-        if($line_user['admin_p']) {
-            $template->setVariable("USERS_SECTION", "Gestión de Usuarios"); // cambia el titulo de la sección
-        } else {
-            $template->setVariable("USERS_SECTION", "Busca Usuarios"); // cambia el titulo de la sección
-            $query_users = "$query_users AND admin_p != 1";
+        $search_query = "SELECT * FROM b_cuentas WHERE (usuario LIKE '%$search%' OR id_cuenta = '$search') AND id_cuenta != $this_user_id";
+        
+        if(!$line_user['admin_p']) {
+            $search_query = "$search_query AND admin_p = 0";
         }
 
-        // carga el archivo que contriene el formato para presentar libros
-        $template->addBlockfile("COLLECTION", "USER_COLLECTION", "./collections/user-collection.html");
+        $search_result = mysqli_query($link, $search_query);
 
         $i = 0;
 
-        // obtiene la información de los libros en la base de datos
-        $result_users = mysqli_query($link, $query_users);
-
-        // para cada resultado del query
-        while($line_users = mysqli_fetch_assoc($result_users)) {
-            $user_id = $line_users['id_cuenta'];
+        while($line_result = mysqli_fetch_assoc($search_result)) {
+            $user_id = $line_result['id_cuenta'];
 
             $query_friends = "SELECT COUNT(*) AS amigos FROM b_usuario_usuario WHERE id_cuenta = $user_id OR id_amigo = $user_id";
             $result_friends = mysqli_query($link, $query_friends);
@@ -74,8 +64,8 @@
 
             // coloca toda la información del libro
             $template->setVariable("ID", $user_id);
-            $template->setVariable("IMAGE", $line_users['imagen']);
-            $template->setVariable("NAME", $line_users['usuario']);
+            $template->setVariable("IMAGE", $line_result['imagen']);
+            $template->setVariable("NAME", $line_result['usuario']);
             $template->setVariable("FRIENDS", $friends);
             
             $template->parseCurrentBlock();
@@ -83,21 +73,17 @@
             $i++;
         }
 
-        // si no hay usuarios en la base de datos
-        if(!$i) {
-            print("No hay nada"); // missing template
+        if($i) {
+            mysqli_free_result($search_result);
         } else {
-            mysqli_free_result($result_users); // libera memoria
+            print("No se encontraron usuarios"); // missing template
         }
-        
-        mysqli_free_result($result_user); // libera memoria
-    } else {
-        print("User verification error..."); // missing template
-    }
-    
-    // muestra la pantalla
-    $template->show();
 
-    // cierra la conexión a la base de datos
+        mysqli_free_result($result_user);
+    } else {
+        print("User validation error.");
+    }
+
+    $template->show();
     @mysqli_close($link);
 ?>

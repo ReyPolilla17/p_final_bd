@@ -1,4 +1,4 @@
-function selectItem(item_id) {
+function selectItem(item_id, run) {
     var user = document.getElementById("username-holder").value; //información del usuario
     var password = document.getElementById("password-holder").value; // información del usuario
 
@@ -8,6 +8,10 @@ function selectItem(item_id) {
     var nav_bar = document.querySelector(".nav-bar-wrapper"); // manú de opciones
 
     var run_php = false; // para evitar enviar solicitudes si el elemento ya está seleccionado
+
+    if(run) { // en caso de que se desee regresar a la vista general
+        run_php = true;
+    }
 
     for(const child of nav_bar.children) { // para cada elemento del menu de opciones
         if(item_id !== child.id) {

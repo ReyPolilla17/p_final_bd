@@ -29,7 +29,7 @@
     align-items: center;
 }
 
-.user-wrapper > .user-profile > .user-image {
+.user-image {
     display: flex;
     align-items: center;
     width: 80px;
@@ -38,7 +38,7 @@
     border-radius: 100%;
 }
 
-.user-wrapper > .user-profile > .user-image img {
+.user-image img {
     width: inherit;
 }
 
@@ -179,7 +179,7 @@
     padding: 10px;
 }
 
-.collection-book > .info-wrapper > .genre-wrapper span {
+.genre-wrapper span {
     background-color: #438E36;
     color: white;
     padding: 5px;
@@ -188,15 +188,14 @@
     max-width: max-content;
 }
 
-
-
-
-
 .search-wrapper {
+    padding-bottom: 15px;
+}
+
+.with-menu {
     display: grid;
     grid-template-columns: 2fr 0.5fr;
     gap: 10px;
-    padding-bottom: 15px;
 }
 
 .search-wrapper > .search-item {
@@ -241,7 +240,7 @@
     padding-bottom: 15px;
 }
 
-.add-wrapper button {
+button {
     padding: 10px;
     border-radius: 5px;
     font-size: 1.1em;
@@ -251,10 +250,42 @@
     transition: 0.3s;
 }
 
-.add-wrapper button:hover {
+button:hover {
     background-color: #2d6323;
 }
 
-.add-wrapper button:active {
+button:active {
     background-color: #438E36;
+}
+
+.info-view > .general {
+    padding-top: 20px;
+    display: flex;
+}
+
+.info-view > .general > .image-wrapper {
+    width: 40%;
+    padding-right: 20px;
+}
+
+.info-view > .general > .image-wrapper img {
+    width: 100%;
+}
+
+.collection-user {
+    display: flex;
+    align-items: center;
+    border-radius: 20px;
+    border: 3px solid #4A3D3D;
+    padding: 10px;
+    transition: 0.3s;
+}
+
+.collection-user > .info-wrapper {
+    padding-left: 20px;
+}
+
+.collection-user:hover {
+    cursor: pointer;
+    border-color: #73693B;
 }

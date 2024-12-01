@@ -23,3 +23,74 @@ function searchBook() {
 function displayBooks(result, status, xhr) {
     $("#book-list").html(result); // muestra los resultados de la búsqueda
 }
+
+function bookInfo(id) {
+    var user = document.getElementById("username-holder").value; // información del ususario
+    var password = document.getElementById("password-holder").value; // información del ususario
+
+    var info = `username=${user}&password=${password}&id=${id}`;
+    
+    $.ajax({
+        url: './php/book-info.php',
+        dataType: 'html',
+        type: 'POST',
+        async: true,
+        data: info,
+        success: displayBookInfo,
+        error: eFnction
+    });
+}
+
+function displayBookInfo(result, status, xhr) {
+    $("#section-start").html(result); // muestra los resultados de la búsqueda
+
+    window.location.href = "#section-start"; // redirige al inicio de la página 
+}
+
+function searchUser() {
+    var user = document.getElementById("username-holder").value; // información del ususario
+    var password = document.getElementById("password-holder").value; // información del ususario
+
+    var search = document.getElementById("user-search").value; // el valor a buscar
+
+    var info = `username=${user}&password=${password}&search=${search}`; // información a enviar
+    var dir = "./php/search-users.php"; // archivo a ejecutar
+
+    // ejecuta el archivo
+    $.ajax({
+        url: dir,
+		dataType: 'html',
+		type: 'POST',
+		async: true,
+		data: info,
+		success: displayUsers,
+		error: eFnction
+    });
+}
+
+function displayUsers(result, status, xhr) {
+    $("#user-list").html(result); // muestra los resultados de la búsqueda
+}
+
+function userInfo(id) {
+    var user = document.getElementById("username-holder").value; // información del ususario
+    var password = document.getElementById("password-holder").value; // información del ususario
+
+    var info = `username=${user}&password=${password}&id=${id}`;
+    
+    $.ajax({
+        url: './php/user-info.php',
+        dataType: 'html',
+        type: 'POST',
+        async: true,
+        data: info,
+        success: displayUserInfo,
+        error: eFnction
+    });
+}
+
+function displayUserInfo(result, status, xhr) {
+    $("#section-start").html(result); // muestra los resultados de la búsqueda
+
+    window.location.href = "#section-start"; // redirige al inicio de la página 
+}
