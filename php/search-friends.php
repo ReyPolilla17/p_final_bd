@@ -19,7 +19,7 @@
 
         $template->loadTemplatefile("./collections/user-collection.html", true, true);
 
-        $search_query = "SELECT * FROM b_cuentas WHERE (usuario LIKE '%$search%' OR id_cuenta = '$search') AND id_cuenta != $this_user_id";
+        $search_query = "SELECT * FROM b_cuentas WHERE (id_cuenta IN (SELECT id_cuenta FROM b_usuario_usuario WHERE (id_cuenta = $this_user_id OR id_amigo = $this_user_id)) OR id_cuenta IN (SELECT id_amigo FROM b_usuario_usuario WHERE (id_cuenta = $this_user_id OR id_amigo = $this_user_id))) AND id_cuenta != $this_user_id AND (usuario LIKE '%$search%' OR id_cuenta = '$search')";
         
         if(!$line_user['admin_p']) {
             $search_query = "$search_query AND admin_p = 0";
@@ -48,22 +48,10 @@
                 $friends = "$friends amigos";
             }
 
-            $query_are_friends = "SELECT COUNT(*) amigos FROM b_usuario_usuario WHERE (id_cuenta = $user_id OR id_amigo = $user_id) AND (id_cuenta = $this_user_id OR id_amigo = $this_user_id)";
-            $result_are_friends = mysqli_query($link, $query_are_friends);
-
-            $line_are_friends = mysqli_fetch_assoc($result_are_friends);
-            $are_friends = $line_are_friends['amigos'];
-
-            mysqli_free_result($result_are_friends); // libera memoria
-
             $template->setCurrentBlock("USERS");
             
-            if($are_friends) {
-                $template->setVariable("YOUR_FRIEND", "Son amigos");
-            }
-
             // coloca toda la información del libro
-            $template->setVariable("ORIGIN", 'users');
+            $template->setVariable("ORIGIN", 'friends');
             $template->setVariable("ID", $user_id);
             $template->setVariable("IMAGE", $line_result['imagen']);
             $template->setVariable("NAME", $line_result['usuario']);

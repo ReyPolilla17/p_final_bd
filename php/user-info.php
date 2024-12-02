@@ -6,6 +6,7 @@
     $user = implode("\'", explode("'", implode("\\\\", explode("\\", $_POST['username']))));
     $pass = implode("\'", explode("'", implode("\\\\", explode("\\", $_POST['password']))));
     $id = implode("\'", explode("'", implode("\\\\", explode("\\", $_POST['id']))));
+    $origin = implode("\'", explode("'", implode("\\\\", explode("\\", $_POST['origin']))));
 
     // se conecta a la base de datos
     $link = mysqli_connect($cfgServer['host'], $cfgServer['user'], $cfgServer['password']);
@@ -129,7 +130,8 @@
         //     print("No hay nada"); // missing template
         // }
 
-        print("User Info"); // luego lo hago
+        print("User Info: "); // luego lo hago
+        print("$user, $pass, $id, $origin");
 
         mysqli_free_result($result_users); // libera memoria
     } else {

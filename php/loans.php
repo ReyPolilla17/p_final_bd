@@ -30,13 +30,12 @@
         $result_loans = mysqli_query($link, $query_loans);
 
         $i = 0;
+        $has_active = 0;
+        $has_inactive = 0;
 
         while($line_loans = mysqli_fetch_assoc($result_loans)) {
             $book_id = $line_loans['id_libro'];
             $user_id = $line_loans['id_cuenta'];
-
-            $has_active = 0;
-            $has_inactive = 0;
 
             $authors = "Sin autores registrados";
 
@@ -91,6 +90,7 @@
             $template->setVariable("TITLE", $line_loans['nombre']);
             $template->setVariable("AUTHORS", $authors);
             $template->setVariable("COPY", $line_loans['id_copia']);
+            $template->setVariable("L_ID", $line_loans['id_reservacion']);
             $template->setVariable("L_DATE", $line_loans['fecha_prestamo']);
             
             $template->parseCurrentBlock();
@@ -98,12 +98,14 @@
             $i++;
         }
 
-        if(!$has_inactive) {
-            $template->setVariable("INACTIVE_EMPTY", "Nada por aqui."); // missing template
-        }
+        $template->setCurrentBlock();
 
         if(!$has_active) {
             $template->setVariable("ACTIVE_EMPTY", "Nada por aqui."); // missing template
+        }
+
+        if(!$has_inactive) {
+            $template->setVariable("INACTIVE_EMPTY", "Nada por aqui."); // missing template
         }
 
         if($i) {

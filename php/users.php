@@ -22,6 +22,7 @@
         $query_users = "SELECT * FROM b_cuentas WHERE id_cuenta != $this_user_id";
 
         $template->loadTemplatefile("users.html");
+        $template->setVariable("FUNCTION", "user");
 
         if($line_user['admin_p']) {
             $template->setVariable("USERS_SECTION", "Gestión de Usuarios"); // cambia el titulo de la sección
@@ -73,6 +74,7 @@
             }
 
             // coloca toda la información del libro
+            $template->setVariable("ORIGIN", 'users');
             $template->setVariable("ID", $user_id);
             $template->setVariable("IMAGE", $line_users['imagen']);
             $template->setVariable("NAME", $line_users['usuario']);

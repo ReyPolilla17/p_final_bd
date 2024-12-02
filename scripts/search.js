@@ -24,12 +24,12 @@ function displayBooks(result, status, xhr) {
     $("#book-list").html(result); // muestra los resultados de la búsqueda
 }
 
-function bookInfo(id) {
+function bookInfo(id, origin) {
     var user = document.getElementById("username-holder").value; // información del ususario
     var password = document.getElementById("password-holder").value; // información del ususario
 
-    var info = `username=${user}&password=${password}&id=${id}`;
-    
+    var info = `username=${user}&password=${password}&id=${id}&origin=${origin}`;
+
     $.ajax({
         url: './php/book-info.php',
         dataType: 'html',
@@ -47,7 +47,7 @@ function displayBookInfo(result, status, xhr) {
     window.location.href = "#section-start"; // redirige al inicio de la página 
 }
 
-function searchUser() {
+function searchUser(user_type) {
     var user = document.getElementById("username-holder").value; // información del ususario
     var password = document.getElementById("password-holder").value; // información del ususario
 
@@ -55,6 +55,10 @@ function searchUser() {
 
     var info = `username=${user}&password=${password}&search=${search}`; // información a enviar
     var dir = "./php/search-users.php"; // archivo a ejecutar
+    
+    if(user_type === "friend") {
+        dir = "./php/search-friends.php"; // archivo a ejecutar
+    }
 
     // ejecuta el archivo
     $.ajax({
@@ -72,11 +76,11 @@ function displayUsers(result, status, xhr) {
     $("#user-list").html(result); // muestra los resultados de la búsqueda
 }
 
-function userInfo(id) {
+function userInfo(id, origin) {
     var user = document.getElementById("username-holder").value; // información del ususario
     var password = document.getElementById("password-holder").value; // información del ususario
 
-    var info = `username=${user}&password=${password}&id=${id}`;
+    var info = `username=${user}&password=${password}&id=${id}&origin=${origin}`;
     
     $.ajax({
         url: './php/user-info.php',

@@ -6,6 +6,7 @@
     $user = implode("\'", explode("'", implode("\\\\", explode("\\", $_POST['username']))));
     $pass = implode("\'", explode("'", implode("\\\\", explode("\\", $_POST['password']))));
     $id = implode("\'", explode("'", implode("\\\\", explode("\\", $_POST['id']))));
+    $origin = implode("\'", explode("'", implode("\\\\", explode("\\", $_POST['origin']))));
 
     // se conecta a la base de datos
     $link = mysqli_connect($cfgServer['host'], $cfgServer['user'], $cfgServer['password']);
@@ -67,6 +68,7 @@
             }
             
             // coloca toda la información del libro
+            $template->setVariable("ORIGIN", "$origin");
             $template->setVariable("ID", $book_id);
             $template->setVariable("IMAGE", $line_book['imagen']);
             $template->setVariable("TITLE", $line_book['libro']);
