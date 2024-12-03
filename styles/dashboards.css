@@ -289,3 +289,30 @@ button:active {
     cursor: pointer;
     border-color: #73693B;
 }
+
+td {
+    padding: 5px 20px;
+}
+
+.selectable {
+    transition: 0.3s;
+}
+
+.selectable:hover {
+    cursor: pointer;
+    color: #73693B;
+}
+
+.empty-holder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 20%;
+}
+
+#loaned-authors {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 20px 0;
+}

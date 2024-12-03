@@ -21,7 +21,7 @@
         $this_user_id = $line_user['id_cuenta'];
         $query_users = "SELECT * FROM b_cuentas WHERE (id_cuenta IN (SELECT id_cuenta FROM b_usuario_usuario WHERE (id_cuenta = $this_user_id OR id_amigo = $this_user_id)) OR id_cuenta IN (SELECT id_amigo FROM b_usuario_usuario WHERE (id_cuenta = $this_user_id OR id_amigo = $this_user_id))) AND id_cuenta != $this_user_id";
 
-        $template->loadTemplatefile("users.html");
+        $template->loadTemplatefile("users.html", true, true);
         $template->setVariable("FUNCTION", "friend");
 
         if($line_user['admin_p']) {

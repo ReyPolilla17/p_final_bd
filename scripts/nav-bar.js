@@ -5,7 +5,7 @@ function selectItem(item_id, run) {
     var info = `username=${user}&password=${password}`; // elementos a enviar
     var dir = "./php/error.php"; // código php que se mandará
 
-    var nav_bar = document.querySelector(".nav-bar-wrapper"); // manú de opciones
+    var nav_bar = document.querySelector(".nav-bar-wrapper"); // menú de opciones
 
     var run_php = false; // para evitar enviar solicitudes si el elemento ya está seleccionado
 

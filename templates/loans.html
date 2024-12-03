@@ -6,72 +6,69 @@
     <h2>Préstamos Activos</h2>
 </div>
 
-<!-- BEGIN ACTIVE -->
+<table>
+    <!-- BEGIN ACTIVE_LABELS -->
+    <tr>
+        <td><h3>Libro</h3></td>
+        <td><h3>{USER_ID_PLACEHOLDER}</h3></td>
+        <td><h3>Id de copia</h3></td>
+        <td><h3>Fecha de Préstamo</h3></td>
+    </tr>
+    <!-- END ACTIVE_LABELS -->
+    
+    <!-- BEGIN ACTIVE -->
+    <tr>
+        <td class="selectable" onclick="bookInfo({BOOK_ID}, 'loans')">
+            <h4>{TITLE}</h4>
+            {AUTHORS}
+        </td>
+        <td class="selectable" onclick="userInfo({USER_ID}, 'loans')">{USER}</td>
+        <td>{COPY}</td>
+        <td>{L_DATE}</td>
+        <td><button onclick="returnBook({L_ID})">Regresar</button></td>
+    </tr>
+    <!-- END ACTIVE -->
 
-<div class="active-loan">
-    <div class="book-info">
-        <div class="book-title">
-            <h1>{TITLE}</h1>
-        </div>
-        <div class="book-authors">
-            <h2>{AUTHORS}</h2>
-        </div>
-    </div>
+</table>
 
-    <div class="user-id">
-        <h2>{USER}</h2>
-    </div>
-
-    <div class="copy-id">
-        <h2>{COPY}</h2>
-    </div>
-
-    <div class="loan-date">
-        <h3>{L_DATE}</h3>
-    </div>
-
-    <div class="return-button">
-        <button onclick="returnBook({L_ID})">Regresar</button>
-    </div>
+<!-- BEGIN EMPTY_ACTIVE -->
+<div class="empty-holder">
+    <h3>{ACTIVE_EMPTY}</h3>
 </div>
-
-<!-- END ACTIVE -->
-
-{ACTIVE_EMPTY}
+<!-- END EMPTY_ACTIVE -->
 
 <div class="section-subtitle">
     <h2>Préstamos Pasados</h2>
 </div>
 
-<!-- BEGIN INACTIVE -->
-
-<div class="inactive-loan">
-    <div class="book-info">
-        <div class="book-title">
-            <h1>{TITLE}</h1>
-        </div>
-        <div class="book-authors">
-            <h2>{AUTHORS}</h2>
-        </div>
-    </div>
-
-    <div class="user-id">
-        <h2>{USER}</h2>
-    </div>
-
-    <div class="copy-id">
-        <h2>{COPY}</h2>
-    </div>
-
-    <div class="loan-date">
-        <h3>{L_DATE}</h3>
-    </div>
+<table>
+    <!-- BEGIN INACTIVE_LABELS -->
+    <tr>
+        <td><h3>Libro</h3></td>
+        <td><h3>{USER_ID_PLACEHOLDER}</h3></td>
+        <td><h3>Id de copia</h3></td>
+        <td><h3>Fecha de Préstamo</h3></td>
+        <td><h3>Fecha de Devolución</h3></td>
+    </tr>
+    <!-- END INACTIVE_LABELS -->
     
-    <div class="return-date">
-        <h3>{R_DATE}</h3>
-    </div>
+    <!-- BEGIN INACTIVE -->
+    <tr>
+        <td class="selectable" onclick="bookInfo({BOOK_ID}, 'loans')">
+            <h4>{TITLE}</h4>
+            {AUTHORS}
+        </td>
+        <td class="selectable" onclick="userInfo({USER_ID}, 'loans')">{USER}</td>
+        <td>{COPY}</td>
+        <td>{L_DATE}</td>
+        <td>{R_DATE}</td>
+    </tr>
+    <!-- END INACTIVE -->
+
+</table>
+
+<!-- BEGIN EMPTY_INACTIVE -->
+<div class="empty-holder">
+    <h3>{INACTIVE_EMPTY}</h3>
 </div>
-
-<!-- END INACTIVE -->
-
-{INACTIVE_EMPTY}
+<!-- END EMPTY_INACTIVE -->

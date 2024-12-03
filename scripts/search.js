@@ -28,7 +28,13 @@ function bookInfo(id, origin) {
     var user = document.getElementById("username-holder").value; // información del ususario
     var password = document.getElementById("password-holder").value; // información del ususario
 
+    var nav_bar = document.querySelector(".nav-bar-wrapper"); // menú de opciones
+
     var info = `username=${user}&password=${password}&id=${id}&origin=${origin}`;
+
+    for(const child of nav_bar.children) { // para cada elemento del menu de opciones
+        child.className = "nav-bar-item"; // elimina el estilo de seleccionado
+    }
 
     $.ajax({
         url: './php/book-info.php',
@@ -80,7 +86,13 @@ function userInfo(id, origin) {
     var user = document.getElementById("username-holder").value; // información del ususario
     var password = document.getElementById("password-holder").value; // información del ususario
 
+    var nav_bar = document.querySelector(".nav-bar-wrapper"); // menú de opciones
+
     var info = `username=${user}&password=${password}&id=${id}&origin=${origin}`;
+
+    for(const child of nav_bar.children) { // para cada elemento del menu de opciones
+        child.className = "nav-bar-item"; // elimina el estilo de seleccionado
+    }
     
     $.ajax({
         url: './php/user-info.php',

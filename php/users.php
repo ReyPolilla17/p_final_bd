@@ -21,7 +21,7 @@
         $this_user_id = $line_user['id_cuenta'];
         $query_users = "SELECT * FROM b_cuentas WHERE id_cuenta != $this_user_id";
 
-        $template->loadTemplatefile("users.html");
+        $template->loadTemplatefile("users.html", true, true);
         $template->setVariable("FUNCTION", "user");
 
         if($line_user['admin_p']) {

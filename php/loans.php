@@ -21,10 +21,16 @@
         $this_user_id = $line_users['id_cuenta'];
         $template->loadTemplatefile("loans.html", true, true);
 
+        $active_empty = "No se encontraron préstamos activos.";
+        $inactive_empty = "No se ha realizado ninguna reservación.";
+        
         $query_loans = "SELECT * FROM v_libros_reservaciones";
         
         if(!$line_users['admin_p']) {
             $query_loans = "$query_loans WHERE id_cuenta = $this_user_id";
+            
+            $active_empty = "No tienes préstamos activos.";
+            $inactive_empty = "No has realizado ninguna reservación.";
         }
 
         $result_loans = mysqli_query($link, $query_loans);
@@ -90,6 +96,8 @@
             $template->setVariable("TITLE", $line_loans['nombre']);
             $template->setVariable("AUTHORS", $authors);
             $template->setVariable("COPY", $line_loans['id_copia']);
+            $template->setVariable("USER_ID", $user_id);
+            $template->setVariable("BOOK_ID", $book_id);
             $template->setVariable("L_ID", $line_loans['id_reservacion']);
             $template->setVariable("L_DATE", $line_loans['fecha_prestamo']);
             
@@ -99,14 +107,34 @@
         }
 
         $template->setCurrentBlock();
-
+        
         if(!$has_active) {
-            $template->setVariable("ACTIVE_EMPTY", "Nada por aqui."); // missing template
+            $template->setCurrentBlock("EMPTY_ACTIVE");
+            $template->setVariable("ACTIVE_EMPTY", $active_empty);
+            $template->parseCurrentBlock();
+        } else if($line_users['admin_p']) {
+            $template->setCurrentBlock("ACTIVE_LABELS");
+            $template->setVariable("USER_ID_PLACEHOLDER", "Usuario");
+            $template->parseCurrentBlock();
+        } else {
+            $template->touchBlock("ACTIVE_LABELS");
         }
-
+        
+        $template->setCurrentBlock();
+        
         if(!$has_inactive) {
-            $template->setVariable("INACTIVE_EMPTY", "Nada por aqui."); // missing template
+            $template->setCurrentBlock("EMPTY_INACTIVE");
+            $template->setVariable("INACTIVE_EMPTY", $inactive_empty);
+            $template->parseCurrentBlock();
+        } else if($line_users['admin_p']) {
+            $template->setCurrentBlock("INACTIVE_LABELS");
+            $template->setVariable("USER_ID_PLACEHOLDER", "Usuario");
+            $template->parseCurrentBlock();
+        } else {
+            $template->touchBlock("INACTIVE_LABELS");
         }
+        
+        $template->setCurrentBlock();
 
         if($i) {
             mysqli_free_result($result_loans);
