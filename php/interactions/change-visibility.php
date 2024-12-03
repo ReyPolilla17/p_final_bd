@@ -4,7 +4,8 @@
     // trata todas las cadenas recibidas mediante el post
     $user = implode("\'", explode("'", implode("\\\\", explode("\\", $_POST['username']))));
     $pass = implode("\'", explode("'", implode("\\\\", explode("\\", $_POST['password']))));
-    $loan_id = implode("\'", explode("'", implode("\\\\", explode("\\", $_POST['loan_id']))));
+    $list_id = implode("\'", explode("'", implode("\\\\", explode("\\", $_POST['list_id']))));
+    $visibility = implode("\'", explode("'", implode("\\\\", explode("\\", $_POST['visibility']))));
 
     // se conecta a la base de datos
     $link = mysqli_connect($cfgServer['host'], $cfgServer['user'], $cfgServer['password']);
@@ -15,21 +16,22 @@
     $result_users = mysqli_query($link, $query_users);
 
     if($line_users = mysqli_fetch_assoc($result_users)) { // Si el usuario existe
-        $query_loans = "SELECT * FROM b_reservaciones WHERE id_reservacion = $loan_id LIMIT 1";
-        $result_loans = mysqli_query($link, $query_loans);
+        $user_id = $line_users['id_cuenta'];
+        $query_lists = "SELECT * FROM b_listas WHERE id_lista = $list_id AND id_cuenta = $user_id LIMIT 1";
+        $result_lists = mysqli_query($link, $query_lists);
 
-        if($line_loans = mysqli_fetch_assoc($result_loans)) {
-            $query_return = "UPDATE b_reservaciones SET fecha_devolucion = CURDATE() WHERE id_reservacion = $loan_id";
-            mysqli_query($link, $query_return);
+        if($line_lists = mysqli_fetch_assoc($result_lists)) {
+            $query_vis = "UPDATE b_listas SET privada = $visibility WHERE id_lista = $list_id";
+            mysqli_query($link, $query_vis);
 
-            mysqli_free_result($result_loans);
-
+            mysqli_free_result($result_lists);
         }
         
         mysqli_free_result($result_users);
     }
-    
-    print("loans");
+
+    print("lists");
+
     // cierra la conexión a la base de datos
     @mysqli_close($link);
 ?>

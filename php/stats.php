@@ -107,8 +107,6 @@
             }
 
             // Libros más solicitados
-            $template->setCurrentBlock();
-
             $template->setCurrentBlock("LOANED");
 
             $template->addBlockfile("L_COLLECTION", "LOANED_COLLECTION", "./collections/book-collection.html");
@@ -324,10 +322,6 @@
                 
                 $i++;
             }
-
-            $template->setCurrentBlock("POPULAR");
-            $template->parseCurrentBlock();
-            $template->setCurrentBlock();
 
             if($i) {
                 mysqli_free_result($result_most_popular); // libera memoria

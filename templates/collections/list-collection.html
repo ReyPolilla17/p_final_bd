@@ -1,0 +1,25 @@
+<!-- BEGIN LIST -->
+<div class="collection-list">
+    <div class="info-wrapper" onclick="listInfo({ID}, 'lists')">
+        <h3>{NAME}</h3>
+        <span>{BOOK_COUNT}</span>
+    </div>
+    <div class="options-wrapper">
+        <!-- BEGIN PRIVATE -->
+        <button onclick="changeVisibility({ID_P}, 0)"><i class="fa-solid fa-eye-slash"></i></button>
+        <!-- END PRIVATE -->
+        
+        <!-- BEGIN PUBLIC -->
+        <button onclick="changeVisibility({ID_P}, 1)"><i class="fa-solid fa-eye"></i></button>
+        <!-- END PUBLIC -->
+
+        <select name="share-list" id="share-list" onchange="recomendList({ID})">
+            <option value="0" style="display: none;">Recomendar</option>
+
+            <!-- BEGIN FRIENDS -->
+             <option value="{FRIEND_ID}">{FRIEND_NAME}</option>
+            <!-- END FRIENDS -->
+        </select>
+    </div>
+</div>
+<!-- END LIST -->
