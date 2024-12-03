@@ -1,0 +1,35 @@
+.body-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.text-area {
+    width: 50%;
+    background-color: #4A3D3D;
+    border: 3px solid #A49966;
+    color: white;
+    border-radius: 10px;
+    padding: 20px;
+}
+
+h1, .redirect {
+    text-align: center;
+}
+
+.separator {
+    margin: 20px 0;
+    height: 2px;
+    background-color: #73693B;
+    border-radius: 2px;
+}
+
+a {
+    color: #A49966;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
