@@ -144,7 +144,8 @@
         
         mysqli_free_result($result_users);
     } else {
-        print("User verification error..."); // missing template
+        $template->loadTemplatefile("backrooms.html", true, true);
+        $template->touchBlock("PAGE");
     }
 
     // muestra la pantalla

@@ -156,7 +156,8 @@
 
         mysqli_free_result($result);
     } else {
-        print("<h1>Como llegaste hasta aqui?</h1>"); // missing template
+        $template->loadTemplatefile("backrooms.html", true, true);
+        $template->touchBlock("PAGE");
     }
 
     $template->show();

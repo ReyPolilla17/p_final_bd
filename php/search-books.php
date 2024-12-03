@@ -134,7 +134,8 @@
 
         mysqli_free_result($result_users);
     } else {
-        print("User validation error.");
+        $template->loadTemplatefile("backrooms.html", true, true);
+        $template->touchBlock("PAGE");
     }
 
     $template->show();
