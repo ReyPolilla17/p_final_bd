@@ -81,6 +81,8 @@
         } else {
             mysqli_free_result($result_users); // libera memoria
         }
+
+        $template->touchBlock("REQUESTS");
         
         mysqli_free_result($result_user); // libera memoria
     } else {

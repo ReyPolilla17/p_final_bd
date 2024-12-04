@@ -62,9 +62,11 @@
             $i++;
         }
 
-        // si no hay usuarios en la base de datos
+        // si el usuario no tiene listas
         if(!$i) {
-            print("No hay nada"); // missing template
+            $template->setCurrentBlock("EMPTY");
+            $template->setVariable("LISTS_EMPTY", "No has creado ninguna lista.");
+            $template->parseCurrentBlock();
         } else {
             mysqli_free_result($result_users); // libera memoria
         }
