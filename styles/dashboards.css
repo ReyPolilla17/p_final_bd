@@ -342,3 +342,60 @@ td {
     display: flex;
     justify-content: space-between;
 }
+
+.request-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    border-radius: 20px;
+    border: 3px solid #4A3D3D;
+}
+
+.request-wrapper > .user-profile {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    gap: 10px;
+    width: 100%;
+    padding-bottom: 10px;
+    transition: 0.3s;
+}
+
+.request-wrapper > .request-buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    width: 100%;
+}
+
+.lateral-wrapper {
+    display: flex;
+    overflow-x: auto;
+    margin-bottom: 20px;
+}
+
+.lateral-wrapper table {
+    table-layout: fixed;
+}
+
+.lateral-wrapper td {
+    padding: 20px;
+}
+
+.button-deny {
+    background-color: #c93333;
+}
+
+.button-deny:hover {
+    background-color: #992626;
+}
+
+.button-deny:active {
+    background-color: #c93333;
+}
+
+.button-deny:disabled {
+    background-color: #992626;
+}
