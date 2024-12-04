@@ -19,7 +19,6 @@
 
     if($line_user = mysqli_fetch_assoc($result_user)) { // Si el usuario existe
         $this_user_id = $line_user['id_cuenta'];
-        $query_users = "SELECT * FROM b_cuentas WHERE (id_cuenta IN (SELECT id_cuenta FROM b_usuario_usuario WHERE (id_cuenta = $this_user_id OR id_amigo = $this_user_id)) OR id_cuenta IN (SELECT id_amigo FROM b_usuario_usuario WHERE (id_cuenta = $this_user_id OR id_amigo = $this_user_id))) AND id_cuenta != $this_user_id";
 
         $template->loadTemplatefile("users.html", true, true);
         $template->setVariable("FUNCTION", "friend");
@@ -31,12 +30,40 @@
             $query_users = "$query_users AND admin_p != 1";
         }
 
+        $query_requests = "SELECT * FROM v_solicitudes WHERE id_destino = $this_user_id";
+        $result_requests = mysqli_query($link, $query_requests);
+
+        $i = 0;
+
+        while($line_requests = mysqli_fetch_assoc($result_requests)) {
+            if(!$i) {
+                $template->setCurrentBlock("REQUESTS_SECTION");
+            }
+
+            $template->setCurrentBlock("REQUEST");
+            
+            $template->setVariable("USER_ID", $line_requests['id_cuenta']);
+            $template->setVariable("USER_IMAGE", $line_requests['imagen']);
+            $template->setVariable("USERNAME", $line_requests['usuario']);
+            $template->setVariable("DATE", $line_requests['fecha']);
+            $template->setVariable("ORIGIN_R", 'friends');
+
+            $template->parseCurrentBlock();
+        }
+        
+        if($i) {
+            $template->setCurrentBlock("REQUESTS_SECTION");
+            $template->parseCurrentBlock();
+            mysqli_free_result($result_requests); // libera memoria
+        }
+
         // carga el archivo que contriene el formato para presentar libros
         $template->addBlockfile("COLLECTION", "USER_COLLECTION", "./collections/user-collection.html");
 
         $i = 0;
 
-        // obtiene la información de los libros en la base de datos
+        // obtiene la información de los amigos en la base de datos
+        $query_users = "SELECT * FROM b_cuentas WHERE (id_cuenta IN (SELECT id_cuenta FROM b_usuario_usuario WHERE (id_cuenta = $this_user_id OR id_amigo = $this_user_id)) OR id_cuenta IN (SELECT id_amigo FROM b_usuario_usuario WHERE (id_cuenta = $this_user_id OR id_amigo = $this_user_id))) AND id_cuenta != $this_user_id";
         $result_users = mysqli_query($link, $query_users);
 
         // para cada resultado del query
@@ -75,7 +102,7 @@
 
         // si no hay usuarios en la base de datos
         if(!$i) {
-            $template->setCurrentBlock("EMPTY");
+            $template->setCurrentBlock("EMPTY_USERS");
             $template->setVariable("USERS_EMPTY", "Aún no tienes amigos.");
             $template->parseCurrentBlock();
         } else {

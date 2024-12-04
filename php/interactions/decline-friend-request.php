@@ -23,7 +23,7 @@
         mysqli_free_result($result_users);
     }
 
-    print("users");
+    print("friends");
 
     // cierra la conexión a la base de datos
     @mysqli_close($link);

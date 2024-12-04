@@ -87,7 +87,7 @@
 
         // si no hay usuarios en la base de datos
         if(!$i) {
-            $template->setCurrentBlock("EMPTY");
+            $template->setCurrentBlock("EMPTY_USERS");
             $template->setVariable("USERS_EMPTY", "No hay usuarios en la base de datos.");
             $template->parseCurrentBlock();
         } else {

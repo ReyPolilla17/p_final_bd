@@ -358,7 +358,6 @@
             $result_loan_users = mysqli_query($link, $query_loan_users);
 
             $template->addBlockfile("U_COLLECTION", "USER_COLLECTION", "./collections/user-collection.html");
-            $template->setCurrentBlock("USER_COLLECTION");
 
             $i = 0;
 
@@ -382,6 +381,8 @@
                     $friends = "$friends amigos";
                 }
 
+                $template->setCurrentBlock("USERS");
+
                 // coloca toda la información del libro
                 $template->setVariable("ORIGIN", 'stats');
                 $template->setVariable("ID", $user_id);
@@ -398,7 +399,7 @@
             if($i) {
                 mysqli_free_result($result_loan_users); // libera memoria
             } else {
-                $template->setCurrentBlock("EMPTY_USER");
+                $template->setCurrentBlock("EMPTY_USERS");
                 $template->setVariable("USER_EMPTY", "Sin registros.");
                 $template->parseCurrentBlock();
             }

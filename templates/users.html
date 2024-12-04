@@ -1,41 +1,32 @@
-<!-- BEGIN REQUESTS -->
+<!-- BEGIN REQUESTS_SECTION -->
 <div class="section-subtitle">
     <h1>Solicitudes de Amistad</h1>
 </div>
 
 <div class="lateral-wrapper">
-    <div class="request-wrapper">
-        <div class="user-profile">
-            <div class="user-image">
-                <img src="./media/dynamic/users/{U_IMAGE}" alt="User Image">
+    <table>
+        <!-- BEGIN REQUEST -->
+        <td>
+            <div class="request-wrapper">
+                <div class="user-profile selectable" onclick="userInfo({USER_ID}, '{ORIGIN_R}')">
+                    <div class="user-image">
+                        <img src="./media/dynamic/users/{USER_IMAGE}" alt="User Image">
+                    </div>
+                    <div class="user-name">
+                        <h1>{USERNAME}</h1>
+                        <span>{DATE}</span>
+                    </div>
+                </div>
+                <div class="request-buttons">
+                    <button onclick="acceptFriendrequest({USER_ID}, '{ORIGIN_R}', true)"><i class="fa-solid fa-check"></i></button>
+                    <button class="button-deny" onclick="declineFriendrequest({USER_ID})"><i class="fa-solid fa-xmark"></i></button>
+                </div>
             </div>
-            <div class="user-name">
-                <!-- <h1>{USERNAME}</h1> -->
-                <h1>Hola</h1>
-            </div>
-        </div>
-        <div class="request-buttons">
-            <button class="button-accept"><i class="fa-solid fa-check"></i></button>
-            <button class="button-deny"><i class="fa-solid fa-xmark"></i></button>
-        </div>
-    </div>
-    <div class="request-wrapper">
-        <div class="user-profile">
-            <div class="user-image">
-                <img src="./media/dynamic/users/{U_IMAGE}" alt="User Image">
-            </div>
-            <div class="user-name">
-                <!-- <h1>{USERNAME}</h1> -->
-                <h1>Hola</h1>
-            </div>
-        </div>
-        <div class="request-buttons">
-            <button class="button-accept"><i class="fa-solid fa-check"></i></button>
-            <button class="button-deny"><i class="fa-solid fa-xmark"></i></button>
-        </div>
-    </div>
+        </td>
+        <!-- BEGIN REQUEST -->
+    </table>
 </div>
-<!-- END REQUESTS -->
+<!-- END REQUESTS_SECTION -->
 
 <div class="section-title">
     <h1>{USERS_SECTION}</h1>
