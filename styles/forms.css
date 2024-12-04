@@ -23,24 +23,24 @@
     border-radius: 2px;
 }
 
-.form > .form-group {
+.form-group {
     display: grid;
     grid-template-columns: 1fr;
     margin-top: 20px;
 }
 
-.form > .date-of-birth {
+.date-of-birth {
     margin-top: 20px;
 }
 
-.form > .date-of-birth > .date-group {
+.date-of-birth > .date-group {
     display: grid;
     grid-template-columns: 0.25fr 0.5fr 1fr;
     gap: 10px;
     margin-top: 20px;
 }
 
-.form > .date-of-birth > .date-group > .date-element {
+.date-of-birth > .date-group > .date-element {
     display: grid;
 }
 

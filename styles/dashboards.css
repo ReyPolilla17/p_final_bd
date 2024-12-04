@@ -316,3 +316,20 @@ td {
     justify-content: space-around;
     padding: 20px 0;
 }
+
+.profile-view > .profile-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.profile-view > .profile-section img {
+    width: 100%;
+}
+
+.buttons-wrapper {
+    display: flex;
+    justify-content: center;
+}

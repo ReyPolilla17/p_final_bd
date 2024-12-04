@@ -1,0 +1,130 @@
+<div class="section-title">
+    <h1>Perfil de Usuario</h1>
+</div>
+
+<div class="profile-view">
+    <div class="profile-section">
+        <div class="image-info-wrapper">
+            <div class="image-wrapper">
+                <img src="./media/images/amigos.jpg" alt="User Image">
+            </div>
+            <div class="button-wrapper">
+                <button>Subir Imagen</button>
+            </div>
+        </div>
+        <div class="user-info">
+            <h2>Miembro desde</h2>
+            <h2># amigos</h2>
+            <h2># listas</h2>
+            <h2># prestamos</h2>
+        </div>
+    </div>
+
+    <div class="form profile-section">
+        <div class="password-wrapper">
+            <div class="form-group">
+                <div id="password-m" class="mandatory"> </div>
+                <input type="password" name="password" id="password-input" placeholder="Contraseña Actual" onkeydown="resetWarning('password-m')">
+                <label for="password-input">Contraseña</label>
+            </div>
+            <div class="form-group">
+                <div id="n-password-m" class="mandatory"> </div>
+                <input type="password" name="password" id="n-password-input" placeholder="Nueva Contraseña" onkeydown="resetWarning('n-password-m')">
+                <label for="n-password-input">Nueva Contraseña</label>
+            </div>
+            <div class="form-group">
+                <div id="cn-password-m" class="mandatory"> </div>
+                <input type="password" name="password" id="cn-password-input" placeholder="Confirma la Contraseña" onkeydown="resetWarning('cn-password-m')">
+                <label for="password-input">Confirma la Contraseña</label>
+            </div>
+        </div>
+
+        <div class="user-details">
+            <div class="form-group">
+                <div id="username-m" class="mandatory"> </div>
+                <input type="text" name="username" id="username-input" placeholder="Nombre de Usuario" onkeydown="resetWarning('username-m')">
+                <label for="username-input">Nombre de Usuario</label>
+            </div>
+
+            <div class="date-of-birth">
+                <div class="section-title">
+                    <a href="#birth-date-m" name="birth-date" tabindex="-1">
+                        <div id="birth-date-m" class="mandatory"> </div>
+                    </a>
+                    <h2>Fecha de Nacimiento</h2>
+                </div>
+
+                <div class="date-group">
+                    <div class="date-element">
+                        <select name="birth-day" id="day" onchange="resetWarning('birth-date-m')">
+                            <option value="0" style="display: none;">Día</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                            <option value="11">11</option>
+                            <option value="12">12</option>
+                            <option value="13">13</option>
+                            <option value="14">14</option>
+                            <option value="15">15</option>
+                            <option value="16">16</option>
+                            <option value="17">17</option>
+                            <option value="18">18</option>
+                            <option value="19">19</option>
+                            <option value="20">20</option>
+                            <option value="21">21</option>
+                            <option value="22">22</option>
+                            <option value="23">23</option>
+                            <option value="24">24</option>
+                            <option value="25">25</option>
+                            <option value="26">26</option>
+                            <option value="27">27</option>
+                            <option value="28">28</option>
+                            <option value="29">29</option>
+                            <option value="30">30</option>
+                            <option value="31">31</option>
+                        </select>
+                        <label for="day">Día</label>
+                    </div>
+                    
+                    <div class="date-element">
+                        <select name="birth-month" id="month" onchange="updateDaysAviable(), resetWarning('birth-date-m')">
+                            <option value="0" style="display: none;">Mes</option>
+                            <option value="1">Enero</option>
+                            <option value="2">Febrero</option>
+                            <option value="3">Marzo</option>
+                            <option value="4">Abril</option>
+                            <option value="5">Mayo</option>
+                            <option value="6">Junio</option>
+                            <option value="7">Julio</option>
+                            <option value="8">Agosto</option>
+                            <option value="9">Septiembre</option>
+                            <option value="10">Octubre</option>
+                            <option value="11">Noviembre</option>
+                            <option value="12">Diciembre</option>
+                        </select>
+                        <label for="month">Mes</label>
+                    </div>
+                    
+                    <div class="date-element">
+                        <input type="text" name="birth-year" id="year" placeholder="Año" onkeyup="updateDaysAviable(), resetWarning('birth-date-m')">
+                        <label for="year">Año</label>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="buttons-wrapper">
+            <button>Eliminar Cuenta</button>
+        </div>
+        <div class="buttons-wrapper">
+            <button>Guardar Cambios</button>
+        </div>
+    </div>
+</div>

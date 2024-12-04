@@ -50,4 +50,12 @@
         display: grid;
         grid-template-columns: 1fr;
     }
+
+    .profile-view > .profile-section {
+        grid-template-columns: 1fr;
+    }
+
+    .profile-view > .profile-section > .password-wrapper {
+        order: 2;
+    }
 }
