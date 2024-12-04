@@ -146,7 +146,7 @@
     text-decoration: underline;
 }
 
-.content-wrapper > .section-wrapper > .collection-wrapper {
+.collection-wrapper {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     gap: 20px;
@@ -258,6 +258,10 @@ button:active {
     background-color: #438E36;
 }
 
+button:disabled {
+    background-color: #2d6323;
+}
+
 .info-view > .general {
     padding-top: 20px;
     display: flex;
@@ -332,4 +336,9 @@ td {
 .buttons-wrapper {
     display: flex;
     justify-content: center;
+}
+
+.info-view > .button-wrapper {
+    display: flex;
+    justify-content: space-between;
 }

@@ -87,7 +87,9 @@
 
         // si no hay usuarios en la base de datos
         if(!$i) {
-            print("No hay nada"); // missing template
+            $template->setCurrentBlock("EMPTY");
+            $template->setVariable("USERS_EMPTY", "No hay usuarios en la base de datos.");
+            $template->parseCurrentBlock();
         } else {
             mysqli_free_result($result_users); // libera memoria
         }

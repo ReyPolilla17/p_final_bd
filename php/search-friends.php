@@ -65,7 +65,9 @@
         if($i) {
             mysqli_free_result($search_result);
         } else {
-            print("No se encontraron usuarios"); // missing template
+            $template->setCurrentBlock("EMPTY");
+            $template->setVariable("USERS_EMPTY", "No se encontraron amigos.");
+            $template->parseCurrentBlock();
         }
 
         mysqli_free_result($result_user);

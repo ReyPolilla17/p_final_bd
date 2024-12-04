@@ -40,7 +40,7 @@
         overflow-y: visible;
     }
 
-    .content-wrapper > .section-wrapper > .collection-wrapper {
+    .collection-wrapper {
         display: grid;
         grid-template-columns: 1fr;
         gap: 20px;
@@ -55,7 +55,23 @@
         grid-template-columns: 1fr;
     }
 
+    .date-of-birth > .date-group {
+        grid-template-columns: 1fr;
+    }
+    
+    .profile-view > .profile-section > .user-details {
+        order: 1;
+    }
+    
     .profile-view > .profile-section > .password-wrapper {
         order: 2;
+    }
+
+    .profile-view > .profile-section > .update-account {
+        order: 3;
+    }
+
+    .profile-view > .profile-section > .delete-account {
+        order: 4;
     }
 }

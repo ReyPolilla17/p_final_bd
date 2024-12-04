@@ -75,7 +75,9 @@
 
         // si no hay usuarios en la base de datos
         if(!$i) {
-            print("No hay amigos"); // missing template
+            $template->setCurrentBlock("EMPTY");
+            $template->setVariable("USERS_EMPTY", "Aún no tienes amigos.");
+            $template->parseCurrentBlock();
         } else {
             mysqli_free_result($result_users); // libera memoria
         }

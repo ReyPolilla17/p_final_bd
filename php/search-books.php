@@ -128,9 +128,10 @@
         if($i) {
             mysqli_free_result($search_result);
         } else {
-            print("No se encontraron libros"); // missing template
+            $template->setCurrentBlock("EMPTY");
+            $template->setVariable("BOOKS_EMPTY", "No se encontraron libros.");
+            $template->parseCurrentBlock();
         }
-
 
         mysqli_free_result($result_users);
     } else {

@@ -20,119 +20,80 @@
     $result_users = mysqli_query($link, $query_users);
 
     if($line_users = mysqli_fetch_assoc($result_users)) { // Si el usuario existe
-        // carga la plantilla del libro
-        $template->loadTemplatefile("user-info.html", true, true);
-        
-        if($line_users['admin_p']) { // si el usuario es administrador
-            // $template->setVariable("BOOKS_SECTION", "Gestión de Libros"); // cambia el titulo de la sección
+        $this_user_id = $line_users['id_cuenta'];
+
+        $query_user = "SELECT * FROM b_cuentas WHERE id_cuenta = $id LIMIT 1";
+        $result_user = mysqli_query($link, $query_user);
+
+        if($line_user = mysqli_fetch_assoc($result_user)) {
+            $user_id = $line_user['id_cuenta'];
+
+            if($line_users['admin_p']) { // si el usuario es administrador
+                $template->loadTemplatefile("my-user.html", true, true);
+            } else {
+                $template->loadTemplatefile("user-info.html", true, true);
+            }
+
+            $query_friends = "SELECT COUNT(*) AS amigos FROM b_usuario_usuario WHERE id_cuenta = $user_id OR id_amigo = $user_id";
+            $result_friends = mysqli_query($link, $query_friends);
             
-            // // agrega la opción de agregar libros
-            // $template->addBlockfile("ADMIN_ADD", "ADMIN_SECTION", "./admin/add-book.html");
-            // $template->touchBlock("ADMIN_SECTION");
-            // Opciones de administrador!!!
-        } else {
-            // $template->setVariable("BOOKS_SECTION", "Busca Libros"); // cambia el título de la sección
-            // Opciones de usuario!!!
+            $line_friends = mysqli_fetch_assoc($result_friends);
+            $friends = $line_friends['amigos'];
+
+            mysqli_free_result($result_friends); // libera memoria
+
+            if(!$friends) {
+                $friends = "Sin amigos";
+            } else if($friends == 1) {
+                $friends = "$friends amigo";
+            } else {
+                $friends = "$friends amigos";
+            }
+
+            $query_are_friends = "SELECT * FROM b_usuario_usuario WHERE (id_cuenta = $user_id OR id_amigo = $user_id) AND (id_cuenta = $this_user_id OR id_amigo = $this_user_id)";
+            $result_are_friends = mysqli_query($link, $query_are_friends);
+            
+            $query_request_sent = "SELECT * FROM b_solicitudes WHERE id_origen = $this_user_id AND id_destino = $user_id";
+            $result_request_sent = mysqli_query($link, $query_request_sent);
+            
+            $query_request_recieved = "SELECT * FROM b_solicitudes WHERE id_origen = $user_id AND id_destino = $this_user_id";
+            $result_request_recieved = mysqli_query($link, $query_request_recieved);
+            
+            if($line_are_friends = mysqli_fetch_assoc($result_are_friends)) {
+                $template->setVariable("ALTER_FRIENDSHIP", "Terminar Amistad");
+                $template->setVariable("FUNCTION", "removeFriend($user_id, '$origin', false)");
+                
+                $friend_since = $line_are_friends['fecha_inicio'];
+                $friend_since = "Amigos desde $friend_since";
+                
+                $template->setVariable("FRIEND", $friend_since);
+                
+                mysqli_free_result($result_are_friends); // libera memoria
+            } else if($line_request_sent = mysqli_fetch_assoc($result_request_sent)) {
+                $template->setVariable("ALTER_FRIENDSHIP", "Solicitud Enviada");
+                $template->setVariable("DISABLED", "disabled");
+                
+                mysqli_free_result($result_request_sent); // libera memoria
+            } else if($line_request_recieved = mysqli_fetch_assoc($result_request_recieved)) {
+                $template->setVariable("ALTER_FRIENDSHIP", "Aceptar Solicitud");
+                $template->setVariable("FUNCTION", "acceptFriendrequest($user_id, '$origin', false)");
+                
+                mysqli_free_result($result_request_recieved); // libera memoria
+            } else {
+                $template->setVariable("ALTER_FRIENDSHIP", "Enviar Solicitud");
+                $template->setVariable("FUNCTION", "sendFriendrequest($user_id, '$origin', false)");
+            }
+
+            $template->setVariable("ORIGIN", $origin);
+            $template->setVariable("IMAGE", $line_user['imagen']);
+            $template->setVariable("USER", $line_user['usuario']);
+            $template->setVariable("JOIN", $line_user['creacion']);
+            $template->setVariable("BIRTH", $line_user['nacimiento']);
+            $template->setVariable("FRIEND_COUNT", $friends);
+            
+            mysqli_free_result($result_user); // libera memoria
         }
         
-        // carga el archivo que contriene el formato para presentar libros
-
-        // obtiene la información de los libros en la base de datos
-        // $query_book = "SELECT * FROM v_info_libro WHERE id_libro = $id LIMIT 1";
-        // $result_book = mysqli_query($link, $query_book);
-
-        // if($line_book = mysqli_fetch_assoc($result_book)) {
-        //     $j = 0;
-
-        //     // información que recibe un tratamiento esecífico
-        //     $book_id = $line_book['id_libro'];
-
-        //     $rating = $line_book['rating'];
-        //     $available = $line_book['disponibles'];
-        //     $authors = "Sin autores registrados";
-
-        //     // Como se muestran las calificaciones
-        //     if($rating) {
-        //         $rating = "Calificación: $rating";
-        //     } else {
-        //         $rating = "Sin Calificaciones";
-        //     }
-
-        //     // como se muestran los libros disponibles
-        //     if(!$available) {
-        //         $available = "Sin disponibilidad.";
-        //     } else if($available == 1) {
-        //         $available = "$available disponible";
-        //     } else {
-        //         $available = "$available disponibles";
-        //     }
-            
-        //     // coloca toda la información del libro
-        //     $template->setVariable("ID", $book_id);
-        //     $template->setVariable("IMAGE", $line_book['imagen']);
-        //     $template->setVariable("TITLE", $line_book['libro']);
-        //     $template->setVariable("EDITORIAL", $line_book['editorial']);
-        //     $template->setVariable("AVAILABLE", $available);
-        //     $template->setVariable("RATING", "$rating");
-        //     $template->setVariable("SUMMARY", $line_book['sinopsis']);
-
-        //     // busca a los autores del libro
-        //     $query_authors = "SELECT * FROM v_libros_autores WHERE id_libro = '$book_id'";
-        //     $result_authors = mysqli_query($link, $query_authors);
-
-        //     // coloca a todos los autores en una misma cadena
-        //     while($line_authors = mysqli_fetch_assoc($result_authors)) {
-        //         $author = $line_authors['autor'];
-
-        //         if(!$j) {
-        //             $authors = $author;
-        //         } else {
-        //             $authors = "$authors, $author";
-        //         }
-
-        //         $j++;
-        //     }
-            
-        //     // libera memoria
-        //     if($j) {
-        //         mysqli_free_result($result_authors);
-        //     }
-
-        //     $j = 0;
-            
-        //     // muestra a los autores del libro
-        //     $template->setVariable("AUTHOR", $authors);
-
-        //     // busca los géneros del libro
-        //     $query_genres = "SELECT * FROM v_libros_generos WHERE id_libro = '$book_id'";
-        //     $result_genres = mysqli_query($link, $query_genres);
-
-        //     // cada genero lo coloca en su propio bloque
-        //     while($line_genres = mysqli_fetch_assoc($result_genres)) {
-        //         $template->setCurrentBlock("GENRES");
-
-        //         $template->setVariable("GENRE", $line_genres['genero']);
-
-        //         $template->parseCurrentBlock("GENRES");
-
-        //         $j++;
-        //     }
-
-        //     // libera memoria
-        //     if($j) {
-        //         mysqli_free_result($result_genres);
-        //     }
-
-        //     $template->parseCurrentBlock();
-
-        //     mysqli_free_result($result_books); // libera memoria
-        // } else {
-        //     print("No hay nada"); // missing template
-        // }
-
-        print("User Info: "); // luego lo hago
-        print("$user, $pass, $id, $origin");
-
         mysqli_free_result($result_users); // libera memoria
     } else {
         $template->loadTemplatefile("backrooms.html", true, true);

@@ -1,5 +1,9 @@
 <div class="info-view">
-    <button onclick="selectItem('users', true)">Regresar</button>
+    <div class="button-wrapper">
+        <button onclick="selectItem('{ORIGIN}', true)">Regresar</button>
+        
+        <button {DISABLED} onclick="{FUNCTION}">{ALTER_FRIENDSHIP}</button>
+    </div>
     
     <div class="general">
         <div class="image-wrapper">
@@ -8,8 +12,16 @@
 
         <div class="user-info-wapper">
             <h1>{USER}</h1>
+            <h1>Se unió el {JOIN}</h1>
+            <h1>{FRIEND}</h1>
+            <h1>Cumpleaños {BIRTH}</h1>
+            <h1>{FRIEND_COUNT}</h1>
             
         </div>
+    </div>
+
+    <div class="section-subtitle">
+        <h2>Listas</h2>
     </div>
     
     <div class="options">
