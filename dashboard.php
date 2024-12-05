@@ -82,6 +82,7 @@
                 $template->setCurrentBlock("BOOKS");
 
                 // coloca toda la información del libro
+                $template->setVariable("ORIGIN", 'books');
                 $template->setVariable("ID", $book_id);
                 $template->setVariable("IMAGE", $line_books['imagen']);
                 $template->setVariable("TITLE", $line_books['libro']);

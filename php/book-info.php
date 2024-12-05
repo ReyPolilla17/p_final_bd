@@ -22,16 +22,29 @@
     if($line_users = mysqli_fetch_assoc($result_users)) { // Si el usuario existe
         $this_user_id = $line_users['id_cuenta'];
         // carga la plantilla del libro
+
+        $query_book = "SELECT * FROM v_info_libro WHERE id_libro = $id LIMIT 1";
+        $result_book = mysqli_query($link, $query_book);
         
         if($line_users['admin_p']) { // si el usuario es administrador
-            // Opciones de administrador!!!
+            $template->loadTemplatefile("./admin/admin-book-info.html", true, true);
+            $template->touchBLock("A");
+
+            if($line_book = mysqli_fetch_assoc($result_book)) {
+                $template->setVariable("TITLE_V", $line_book['libro']);
+                $template->setVariable("EDITORIAL_V", $line_book['editorial']);
+                $template->setVariable("RESUME_V", $line_book['sinopsis']);
+                $template->setVariable("STOCK_V", $line_book['disponibles']);
+                $template->setVariable("BOOK_ID", $line_book['id_libro']);
+                
+                mysqli_free_result($result_books); // libera memoria
+            } else {
+                print("No hay nada"); // missing template
+            }
+
         } else {
             // carga el archivo que contriene el formato para presentar libros
             $template->loadTemplatefile("book-info.html", true, true);
-
-            // obtiene la información de los libros en la base de datos
-            $query_book = "SELECT * FROM v_info_libro WHERE id_libro = $id LIMIT 1";
-            $result_book = mysqli_query($link, $query_book);
 
             if($line_book = mysqli_fetch_assoc($result_book)) {
                 $j = 0;
@@ -58,13 +71,18 @@
                 } else if($available == 1) {
                     $available = "$available disponible";
 
-                    $template->touchBlock("ENABLED_BUTTON");
+                    $template->setCurrentBlock("ENABLED_BUTTON");
+                    $template->setVariable("ID_R", $book_id);
+                    $template->parseCurrentBlock();
                 } else {
                     $available = "$available disponibles";
 
-                    $template->touchBlock("ENABLED_BUTTON");
+                    $template->setCurrentBlock("ENABLED_BUTTON");
+                    $template->setVariable("ID_R", $book_id);
+                    $template->parseCurrentBlock();
                 }
                 
+                $template->setCurrentBlock();
                 // coloca toda la información del libro
                 $template->setVariable("ORIGIN", "$origin");
                 $template->setVariable("ORIGIN_1", "$origin");

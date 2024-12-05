@@ -248,3 +248,51 @@ function reloadInfoSection(result, status, xhr) {
             break;
     }
 }
+
+function newBookTemplate() {
+    var user = document.getElementById("username-holder").value; //información del usuario
+    var password = document.getElementById("password-holder").value; // información del usuario
+    
+    var info = `username=${user}&password=${password}`;
+
+    $.ajax({
+        url: './php/edition/new-book-template.php',
+        dataType: 'html',
+        type: 'POST',
+        async: true,
+        data: info,
+        success: displayNewSection,
+        error: eFnction
+    });
+}
+
+function displayNewSection(result, status, xhr) {
+    $("#section-start").html(result); // muestra los resultados de la búsqueda
+}
+
+function createBook(book_id=null) {
+    var user = document.getElementById("username-holder").value; //información del usuario
+    var password = document.getElementById("password-holder").value; // información del usuario
+    var title = document.getElementById("book-title").value;
+    var editorial = document.getElementById("book-editorial").value;
+    var resume = document.getElementById("book-resume").value;
+    var stock = document.getElementById("book-stock").value;
+    
+    var info;
+
+    if(book_id) {
+        info = `username=${user}&password=${password}&title=${title}&editorial=${editorial}&resume=${resume}&stock=${stock}&book_id=${book_id}`;
+    } else {
+        info = `username=${user}&password=${password}&title=${title}&editorial=${editorial}&resume=${resume}&stock=${stock}`;
+    }
+
+    $.ajax({
+        url: './php/edition/edit-book.php',
+        dataType: 'html',
+        type: 'POST',
+        async: true,
+        data: info,
+        success: reloadSection,
+        error: eFnction
+    });
+}
