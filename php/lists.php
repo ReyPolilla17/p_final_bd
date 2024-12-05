@@ -53,8 +53,25 @@
             } else {
                 $template->setCurrentBlock("FRIENDS");
 
-                $query_users = "SELECT * FROM b_cuentas WHERE (id_cuenta IN (SELECT id_cuenta FROM b_usuario_usuario WHERE id_amigo = $this_user_id) OR id_cuenta IN (SELECT id_amigo FROM b_usuario_usuario WHERE id_cuenta = $this_user_id)) AND id_cuenta != $this_user_id";
-        $result_users = mysqli_query($link, $query_users);
+                $query_friends = "SELECT id_cuenta, usuario FROM b_cuentas WHERE (id_cuenta IN (SELECT id_cuenta FROM b_usuario_usuario WHERE id_amigo = $this_user_id) OR id_cuenta IN (SELECT id_amigo FROM b_usuario_usuario WHERE id_cuenta = $this_user_id)) AND id_cuenta != $this_user_id";
+                $result_friends = mysqli_query($link, $query_friends);
+
+                $i = 0;
+
+                while($line_friends = mysqli_fetch_assoc($result_friends)) {
+                    $template->setCurrentBlock("FRIENDS");
+
+                    $template->setVariable("FRIEND_ID", $line_friends['id_cuenta']);
+                    $template->setVariable("FRIEND_NAME", $line_friends['usuario']);
+
+                    $template->parseCurrentBlock();
+
+                    $i++;
+                }
+
+                if($i) {
+                    mysqli_free_result($result_friends);
+                }
 
                 $template->setCurrentBlock("PUBLIC");
             }

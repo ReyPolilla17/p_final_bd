@@ -28,9 +28,13 @@
         if($line_user = mysqli_fetch_assoc($result_user)) {
             $user_id = $line_user['id_cuenta'];
 
+            $query_lists = "SELECT * FROM v_listas_general WHERE id_cuenta = $user_id";
+
             if($line_users['admin_p']) { // si el usuario es administrador
                 $template->loadTemplatefile("my-user.html", true, true);
             } else {
+                $query_lists = "$query_lists AND privada = 0";
+                
                 $template->loadTemplatefile("user-info.html", true, true);
             }
 
@@ -90,6 +94,42 @@
             $template->setVariable("JOIN", $line_user['creacion']);
             $template->setVariable("BIRTH", $line_user['nacimiento']);
             $template->setVariable("FRIEND_COUNT", $friends);
+
+            $result_lists = mysqli_query($link, $query_lists);
+
+            $i = 0;
+
+            while($line_lists = mysqli_fetch_assoc($result_lists)) {
+                $book_count = $line_lists['libros'];
+
+                if(!$i) {
+                    $template->setCurrentBlock("LISTS");
+                }
+
+                $template->setCurrentBlock("LIST_ELEMENT");
+
+                $template->setVariable("ID", $line_lists['id_lista']);
+                $template->setVariable("NAME", $line_lists['nombre']);
+
+                if($book_count) {
+                    $book_count = "$book_count Libros";
+                } else {
+                    $book_count = "Sin libros guardados";
+                }
+
+                $template->setVariable("BOOK_COUNT", $book_count);
+
+                $template->parseCurrentBlock();
+
+                $i++;
+            }
+
+            if($i) {
+
+            } else {
+
+                $template->touchBlock("EMPTY_LISTS");
+            }
             
             mysqli_free_result($result_user); // libera memoria
         }
