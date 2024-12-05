@@ -136,6 +136,23 @@ function removeFriend(friend_id, origin_page, section) {
     }
 }
 
+function recomendList(list_id, friend_id) {
+    var user = document.getElementById("username-holder").value; //información del usuario
+    var password = document.getElementById("password-holder").value; // información del usuario
+    
+    var info = `username=${user}&password=${password}&list_id=${list_id}&friend_id=${friend_id}`;
+
+    $.ajax({
+        url: './php/interactions/recomend-list.php',
+        dataType: 'html',
+        type: 'POST',
+        async: true,
+        data: info,
+        success: reloadSection,
+        error: eFnction
+    });
+}
+
 function reloadSection(result, status, xhr) {
     var elements = result.split("/");
     var origin = elements[0];

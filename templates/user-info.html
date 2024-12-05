@@ -1,6 +1,6 @@
 <div class="info-view">
     <div class="button-wrapper">
-        <button onclick="selectItem('{ORIGIN}', true)">Regresar</button>
+        <button onclick="selectItem('{PAGE_ORIGIN}', true)">Regresar</button>
         
         <button {DISABLED} onclick="{FUNCTION}">{ALTER_FRIENDSHIP}</button>
     </div>
@@ -13,8 +13,8 @@
         <div class="user-info-wapper">
             <h1>{USER}</h1>
             <h1>Se unió el {JOIN}</h1>
-            <h1>{FRIEND}</h1>
             <h1>Cumpleaños {BIRTH}</h1>
+            <h1>{FRIEND}</h1>
             <h1>{FRIEND_COUNT}</h1>
             
         </div>
@@ -30,7 +30,7 @@
             <!-- BEGIN LIST_ELEMENT -->
             <td>
                 <div class="list-wrapper">
-                    <div class="list-info" onclick="listInfo({ID}, 'lists')">
+                    <div class="list-info" onclick="listInfo({ID}, '{ORIGIN}', {USER_ID})">
                         <h3>{NAME}</h3>
                         <span>{BOOK_COUNT}</span>
                     </div>

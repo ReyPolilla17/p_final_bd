@@ -1,7 +1,7 @@
 <div class="collection-wrapper" >
     <!-- BEGIN LIST -->
     <div class="list-wrapper">
-        <div class="list-info" onclick="listInfo({ID}, 'lists')">
+        <div class="list-info" onclick="listInfo({ID}, 'lists', null)">
             <h3>{NAME}</h3>
             <span>{BOOK_COUNT}</span>
         </div>
@@ -14,7 +14,7 @@
             <button onclick="changeVisibility({ID_P}, 1)"><i class="fa-solid fa-eye"></i></button>
             <!-- END PUBLIC -->
     
-            <select name="share-list" id="share-list" {DISABLED} onchange="recomendList({ID})">
+            <select name="share-list" id="share-list" {DISABLED} onchange="recomendList({ID}, this.value)">
                 <option value="0" style="display: none;">Recomendar</option>
     
                 <!-- BEGIN FRIENDS -->

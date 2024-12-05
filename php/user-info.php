@@ -88,7 +88,7 @@
                 $template->setVariable("FUNCTION", "sendFriendrequest($user_id, '$origin', false)");
             }
 
-            $template->setVariable("ORIGIN", $origin);
+            $template->setVariable("PAGE_ORIGIN", $origin);
             $template->setVariable("IMAGE", $line_user['imagen']);
             $template->setVariable("USER", $line_user['usuario']);
             $template->setVariable("JOIN", $line_user['creacion']);
@@ -108,6 +108,8 @@
 
                 $template->setCurrentBlock("LIST_ELEMENT");
 
+                $template->setVariable("ORIGIN", $origin);
+                $template->setVariable("USER_ID", $user_id);
                 $template->setVariable("ID", $line_lists['id_lista']);
                 $template->setVariable("NAME", $line_lists['nombre']);
 

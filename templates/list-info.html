@@ -1,0 +1,31 @@
+<div class="button-wrapper">
+    <button onclick="returnTo('{SECTION_ORIGIN}', '{USER_ORIGIN}')">Regresar</button>
+</div>
+
+<div class="section-title">
+    <h1>{LIST_NAME}</h1>
+</div>
+
+<div class="top-part">
+    <div class="search-wrapper with-menu">
+        <div class="search-item">
+            <input type="text" name="book-search" id="book-search" placeholder="Escribe para buscar..." onkeyup="searchBookInList()">
+            <label for="book-search">Buscar Libros</label>
+        </div>
+
+        <div class="search-item">
+            <select name="book-search-options" id="book-search-options" onchange="searchBookInList()">
+                <option value="1">Nombre</option>
+                <option value="2">Autor</option>
+                <option value="3">Género</option>
+                <option value="4">Editorial</option>
+                <option value="5">ID Libro</option>
+            </select>
+            <label for="book-search-options">Buscar Por</label>
+        </div>
+    </div>
+</div>
+
+<div id="book-list">
+    {COLLECTION}
+</div>

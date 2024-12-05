@@ -32,9 +32,11 @@
 
         // para cada resultado del query
         while($line_lists = mysqli_fetch_assoc($result_lists)) {
+            $list_id = $line_lists['id_lista'];
+
             $template->setCurrentBlock("LIST");
 
-            $template->setVariable("ID", $line_lists['id_lista']);
+            $template->setVariable("ID", $list_id);
             $template->setVariable("NAME", $line_lists['nombre']);
             
             if($line_lists['libros']) {
@@ -59,12 +61,21 @@
                 $i = 0;
 
                 while($line_friends = mysqli_fetch_assoc($result_friends)) {
-                    $template->setCurrentBlock("FRIENDS");
+                    $friend_id = $line_friends['id_cuenta'];
 
-                    $template->setVariable("FRIEND_ID", $line_friends['id_cuenta']);
-                    $template->setVariable("FRIEND_NAME", $line_friends['usuario']);
+                    $query_already_recomended = "SELECT * FROM b_recomendaciones WHERE id_lista = $list_id AND id_destino = $friend_id";
+                    $result_already_recomended = mysqli_query($link, $query_already_recomended);
 
-                    $template->parseCurrentBlock();
+                    if($line_already_recomended = mysqli_fetch_assoc($result_already_recomended)) {
+                        mysqli_free_result($result_already_recomended);
+                    } else {
+                        $template->setCurrentBlock("FRIENDS");
+    
+                        $template->setVariable("FRIEND_ID", $friend_id);
+                        $template->setVariable("FRIEND_NAME", $line_friends['usuario']);
+    
+                        $template->parseCurrentBlock();
+                    }
 
                     $i++;
                 }

@@ -42,15 +42,9 @@ function bookInfo(id, origin) {
         type: 'POST',
         async: true,
         data: info,
-        success: displayBookInfo,
+        success: displayContent,
         error: eFnction
     });
-}
-
-function displayBookInfo(result, status, xhr) {
-    $("#section-start").html(result); // muestra los resultados de la búsqueda
-
-    window.location.href = "#section-start"; // redirige al inicio de la página 
 }
 
 function searchUser(user_type) {
@@ -100,15 +94,9 @@ function userInfo(id, origin) {
         type: 'POST',
         async: true,
         data: info,
-        success: displayUserInfo,
+        success: displayContent,
         error: eFnction
     });
-}
-
-function displayUserInfo(result, status, xhr) {
-    $("#section-start").html(result); // muestra los resultados de la búsqueda
-
-    window.location.href = "#section-start"; // redirige al inicio de la página 
 }
 
 function searchList() {
@@ -134,4 +122,31 @@ function searchList() {
 
 function displayLists(result, status, xhr) {
     $("#list-list").html(result); // muestra los resultados de la búsqueda
+}
+
+function listInfo(id, origin, user_origin) {
+    var user = document.getElementById("username-holder").value; // información del ususario
+    var password = document.getElementById("password-holder").value; // información del ususario
+
+    var nav_bar = document.querySelector(".nav-bar-wrapper"); // menú de opciones
+
+    var info = `username=${user}&password=${password}&id=${id}&origin=${origin}`;
+
+    if(user_origin) {
+        info = `${info}&user_origin=${user_origin}`;
+    }
+
+    for(const child of nav_bar.children) { // para cada elemento del menu de opciones
+        child.className = "nav-bar-item"; // elimina el estilo de seleccionado
+    }
+    
+    $.ajax({
+        url: './php/list-info.php',
+        dataType: 'html',
+        type: 'POST',
+        async: true,
+        data: info,
+        success: displayContent,
+        error: eFnction
+    });
 }

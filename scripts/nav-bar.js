@@ -64,6 +64,14 @@ function selectItem(item_id, run) {
     }
 }
 
+function returnTo(section_id, origin_id) {
+    if(!origin_id) {
+        selectItem(section_id, true);
+    } else {
+        userInfo(origin_id, section_id);
+    }
+}
+
 function displayContent(result, status, xhr) {
     $("#section-start").html(result); // muestra el resultado de la ejecución del php
     
