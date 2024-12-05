@@ -110,3 +110,28 @@ function displayUserInfo(result, status, xhr) {
 
     window.location.href = "#section-start"; // redirige al inicio de la página 
 }
+
+function searchList() {
+    var user = document.getElementById("username-holder").value; // información del ususario
+    var password = document.getElementById("password-holder").value; // información del ususario
+
+    var search = document.getElementById("list-search").value; // el valor a buscar
+
+    var info = `username=${user}&password=${password}&search=${search}`; // información a enviar
+    var dir = "./php/search-lists.php"; // archivo a ejecutar
+
+    // ejecuta el archivo
+    $.ajax({
+        url: dir,
+		dataType: 'html',
+		type: 'POST',
+		async: true,
+		data: info,
+		success: displayLists,
+		error: eFnction
+    });
+}
+
+function displayLists(result, status, xhr) {
+    $("#list-list").html(result); // muestra los resultados de la búsqueda
+}
