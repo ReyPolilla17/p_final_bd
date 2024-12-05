@@ -153,6 +153,74 @@ function recomendList(list_id, friend_id) {
     });
 }
 
+function recomendBook(book_id, friend_id, origin_page) {
+    var user = document.getElementById("username-holder").value; //información del usuario
+    var password = document.getElementById("password-holder").value; // información del usuario
+    
+    var info = `username=${user}&password=${password}&book_id=${book_id}&friend_id=${friend_id}&origin_page=${origin_page}`;
+
+    $.ajax({
+        url: './php/interactions/recomend-book.php',
+        dataType: 'html',
+        type: 'POST',
+        async: true,
+        data: info,
+        success: reloadInfoSection,
+        error: eFnction
+    });
+}
+
+function saveBook(book_id, list_id, origin_page) {
+    var user = document.getElementById("username-holder").value; //información del usuario
+    var password = document.getElementById("password-holder").value; // información del usuario
+    
+    var info = `username=${user}&password=${password}&book_id=${book_id}&list_id=${list_id}&origin_page=${origin_page}`;
+
+    $.ajax({
+        url: './php/interactions/save-book.php',
+        dataType: 'html',
+        type: 'POST',
+        async: true,
+        data: info,
+        success: reloadInfoSection,
+        error: eFnction
+    });
+}
+
+function rateBook(book_id, rating, origin_page) {
+    var user = document.getElementById("username-holder").value; //información del usuario
+    var password = document.getElementById("password-holder").value; // información del usuario
+    
+    var info = `username=${user}&password=${password}&book_id=${book_id}&rating=${rating}&origin_page=${origin_page}`;
+
+    $.ajax({
+        url: './php/interactions/rate-book.php',
+        dataType: 'html',
+        type: 'POST',
+        async: true,
+        data: info,
+        success: reloadInfoSection,
+        error: eFnction
+    });
+}
+
+function requestBook(book_id) {
+    var user = document.getElementById("username-holder").value; //información del usuario
+    var password = document.getElementById("password-holder").value; // información del usuario
+    
+    var info = `username=${user}&password=${password}&book_id=${book_id}`;
+
+    $.ajax({
+        url: './php/interactions/request-book.php',
+        dataType: 'html',
+        type: 'POST',
+        async: true,
+        data: info,
+        success: reloadSection,
+        error: eFnction
+    });
+}
+
 function reloadSection(result, status, xhr) {
     var elements = result.split("/");
     var origin = elements[0];
@@ -165,6 +233,8 @@ function reloadInfoSection(result, status, xhr) {
     var origin = elements[0];
     var option = elements[1];
     var id = elements[2];
+
+    console.log(elements);
 
     switch(option) {
         case 'books':

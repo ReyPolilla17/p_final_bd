@@ -27,7 +27,54 @@
     </div>
     
     
-    <div class="options">
-        {OPTIONS}
+    <div class="form">
+        <div class="form-group">
+            <!-- BEGIN ALREADY_GRADED -->
+            <h1>Calificación</h1>
+            <h2>{USER_GRADE}</h2>
+            <!-- END ALREADY_GRADED -->
+            
+            <!-- BEGIN NOT_GRADED -->
+            <div class="input-wrapper">
+                <div id="book-rating-m" class="mandatory"></div>
+                <select name="rate-book" id="rate-book" onchange="rateBook({ID_G}, this.value, '{ORIGIN_G}')">
+                    <option value="0" style="display: none;">Calificar</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+                <label for="book-rating">Calificar Libro</label>
+            </div>
+            <!-- END NOT_GRADED -->
+        </div>
+        <div class="form-group">
+            <!-- BEGIN DISABLED_BUTTON -->
+            <button disabled>Solicitar Libro</button>
+            <!-- END DISABLED_BUTTON -->
+            
+            <!-- BEGIN ENABLED_BUTTON -->
+            <button onclick="requestBook({ID})">Solicitar Libro</button>
+            <!-- END ENABLED_BUTTON -->
+        </div>
+        <div class="form-group">
+            <select name="recomend-book" id="recomend-book" onchange="recomendBook({ID}, this.value, '{ORIGIN_1}')">
+                <option value="0" style="display: none;">Recomendar</option>
+
+                <!-- BEGIN FRIENDS -->
+                <option value="{FRIEND_ID}">{FRIEND_NAME}</option>
+                <!-- END FRIENDS -->
+            </select>
+        </div>
+        <div class="form-group">
+            <select name="save-book" id="save-book" onchange="saveBook({ID}, this.value, '{ORIGIN_2}')">
+                <option value="0" style="display: none;">Guardar</option>
+
+                <!-- BEGIN LISTS -->
+                <option value="{LIST_ID}">{LIST_NAME}</option>
+                <!-- END LISTS -->
+            </select>
+        </div>
     </div>
 </div>

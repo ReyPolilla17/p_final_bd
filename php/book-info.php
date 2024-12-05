@@ -20,117 +20,197 @@
     $result_users = mysqli_query($link, $query_users);
 
     if($line_users = mysqli_fetch_assoc($result_users)) { // Si el usuario existe
+        $this_user_id = $line_users['id_cuenta'];
         // carga la plantilla del libro
-        $template->loadTemplatefile("book-info.html", true, true);
         
         if($line_users['admin_p']) { // si el usuario es administrador
-            // $template->setVariable("BOOKS_SECTION", "Gestión de Libros"); // cambia el titulo de la sección
-            
-            // // agrega la opción de agregar libros
-            // $template->addBlockfile("ADMIN_ADD", "ADMIN_SECTION", "./admin/add-book.html");
-            // $template->touchBlock("ADMIN_SECTION");
             // Opciones de administrador!!!
         } else {
-            // $template->setVariable("BOOKS_SECTION", "Busca Libros"); // cambia el título de la sección
-            // Opciones de usuario!!!
-        }
-        
-        // carga el archivo que contriene el formato para presentar libros
+            // carga el archivo que contriene el formato para presentar libros
+            $template->loadTemplatefile("book-info.html", true, true);
 
-        // obtiene la información de los libros en la base de datos
-        $query_book = "SELECT * FROM v_info_libro WHERE id_libro = $id LIMIT 1";
-        $result_book = mysqli_query($link, $query_book);
+            // obtiene la información de los libros en la base de datos
+            $query_book = "SELECT * FROM v_info_libro WHERE id_libro = $id LIMIT 1";
+            $result_book = mysqli_query($link, $query_book);
 
-        if($line_book = mysqli_fetch_assoc($result_book)) {
-            $j = 0;
+            if($line_book = mysqli_fetch_assoc($result_book)) {
+                $j = 0;
 
-            // información que recibe un tratamiento esecífico
-            $book_id = $line_book['id_libro'];
+                // información que recibe un tratamiento esecífico
+                $book_id = $line_book['id_libro'];
 
-            $rating = $line_book['rating'];
-            $available = $line_book['disponibles'];
-            $authors = "Sin autores registrados";
+                $rating = $line_book['rating'];
+                $available = $line_book['disponibles'];
+                $authors = "Sin autores registrados";
 
-            // Como se muestran las calificaciones
-            if($rating) {
-                $rating = "Calificación: $rating";
-            } else {
-                $rating = "Sin Calificaciones";
-            }
-
-            // como se muestran los libros disponibles
-            if(!$available) {
-                $available = "Sin disponibilidad.";
-            } else if($available == 1) {
-                $available = "$available disponible";
-            } else {
-                $available = "$available disponibles";
-            }
-            
-            // coloca toda la información del libro
-            $template->setVariable("ORIGIN", "$origin");
-            $template->setVariable("ID", $book_id);
-            $template->setVariable("IMAGE", $line_book['imagen']);
-            $template->setVariable("TITLE", $line_book['libro']);
-            $template->setVariable("EDITORIAL", $line_book['editorial']);
-            $template->setVariable("AVAILABLE", $available);
-            $template->setVariable("RATING", "$rating");
-            $template->setVariable("SUMMARY", $line_book['sinopsis']);
-
-            // busca a los autores del libro
-            $query_authors = "SELECT * FROM v_libros_autores WHERE id_libro = '$book_id'";
-            $result_authors = mysqli_query($link, $query_authors);
-
-            // coloca a todos los autores en una misma cadena
-            while($line_authors = mysqli_fetch_assoc($result_authors)) {
-                $author = $line_authors['autor'];
-
-                if(!$j) {
-                    $authors = $author;
+                // Como se muestran las calificaciones
+                if($rating) {
+                    $rating = "Calificación: $rating";
                 } else {
-                    $authors = "$authors, $author";
+                    $rating = "Sin Calificaciones";
                 }
 
-                $j++;
-            }
-            
-            // libera memoria
-            if($j) {
-                mysqli_free_result($result_authors);
-            }
+                // como se muestran los libros disponibles
+                if(!$available) {
+                    $available = "Sin disponibilidad.";
 
-            $j = 0;
-            
-            // muestra a los autores del libro
-            $template->setVariable("AUTHOR", $authors);
+                    $template->touchBlock("DISABLED_BUTTON");
+                } else if($available == 1) {
+                    $available = "$available disponible";
 
-            // busca los géneros del libro
-            $query_genres = "SELECT * FROM v_libros_generos WHERE id_libro = '$book_id'";
-            $result_genres = mysqli_query($link, $query_genres);
+                    $template->touchBlock("ENABLED_BUTTON");
+                } else {
+                    $available = "$available disponibles";
 
-            // cada genero lo coloca en su propio bloque
-            while($line_genres = mysqli_fetch_assoc($result_genres)) {
-                $template->setCurrentBlock("GENRES");
+                    $template->touchBlock("ENABLED_BUTTON");
+                }
+                
+                // coloca toda la información del libro
+                $template->setVariable("ORIGIN", "$origin");
+                $template->setVariable("ORIGIN_1", "$origin");
+                $template->setVariable("ORIGIN_2", "$origin");
+                $template->setVariable("ID", $book_id);
+                $template->setVariable("IMAGE", $line_book['imagen']);
+                $template->setVariable("TITLE", $line_book['libro']);
+                $template->setVariable("EDITORIAL", $line_book['editorial']);
+                $template->setVariable("AVAILABLE", $available);
+                $template->setVariable("RATING", "$rating");
+                $template->setVariable("SUMMARY", $line_book['sinopsis']);
 
-                $template->setVariable("GENRE", $line_genres['genero']);
+                // busca a los autores del libro
+                $query_authors = "SELECT * FROM v_libros_autores WHERE id_libro = '$book_id'";
+                $result_authors = mysqli_query($link, $query_authors);
+
+                // coloca a todos los autores en una misma cadena
+                while($line_authors = mysqli_fetch_assoc($result_authors)) {
+                    $author = $line_authors['autor'];
+
+                    if(!$j) {
+                        $authors = $author;
+                    } else {
+                        $authors = "$authors, $author";
+                    }
+
+                    $j++;
+                }
+                
+                // libera memoria
+                if($j) {
+                    mysqli_free_result($result_authors);
+                }
+
+                $j = 0;
+                
+                // muestra a los autores del libro
+                $template->setVariable("AUTHOR", $authors);
+
+                // busca los géneros del libro
+                $query_genres = "SELECT * FROM v_libros_generos WHERE id_libro = '$book_id'";
+                $result_genres = mysqli_query($link, $query_genres);
+
+                // cada genero lo coloca en su propio bloque
+                while($line_genres = mysqli_fetch_assoc($result_genres)) {
+                    $template->setCurrentBlock("GENRES");
+
+                    $template->setVariable("GENRE", $line_genres['genero']);
+
+                    $template->parseCurrentBlock();
+
+                    $j++;
+                }
+
+                // libera memoria
+                if($j) {
+                    mysqli_free_result($result_genres);
+                }
+
+                $query_rating = "SELECT * FROM b_calificaciones WHERE id_cuenta = $this_user_id AND id_libro = $book_id";
+                $result_rating = mysqli_query($link, $query_rating);
+
+                if($line_rating = mysqli_fetch_assoc($result_rating)) {
+                    $template->setCurrentBlock("ALREADY_GRADED");
+
+                    $template->setVariable("USER_GRADE", $line_rating['rating']);
+
+                    $template->parseCurrentBlock();
+                    mysqli_free_result($result_rating);
+                } else {
+                    $template->setCurrentBlock("NOT_GRADED");
+                    $template->setVariable("ID_G", $book_id);
+                    $template->setVariable("ORIGIN_G", $origin);
+                    $template->parseCurrentBlock();
+                }
+
+                $template->setCurrentBlock("FRIENDS");
+
+                $query_friends = "SELECT id_cuenta, usuario FROM b_cuentas WHERE (id_cuenta IN (SELECT id_cuenta FROM b_usuario_usuario WHERE id_amigo = $this_user_id) OR id_cuenta IN (SELECT id_amigo FROM b_usuario_usuario WHERE id_cuenta = $this_user_id)) AND id_cuenta != $this_user_id";
+                $result_friends = mysqli_query($link, $query_friends);
+
+                $i = 0;
+
+                while($line_friends = mysqli_fetch_assoc($result_friends)) {
+                    $friend_id = $line_friends['id_cuenta'];
+
+                    $query_already_recomended = "SELECT * FROM b_recomendaciones WHERE id_libro = $book_id AND id_destino = $friend_id";
+                    $result_already_recomended = mysqli_query($link, $query_already_recomended);
+
+                    if($line_already_recomended = mysqli_fetch_assoc($result_already_recomended)) {
+                        mysqli_free_result($result_already_recomended);
+                    } else {
+                        $template->setCurrentBlock("FRIENDS");
+
+                        $template->setVariable("FRIEND_ID", $friend_id);
+                        $template->setVariable("FRIEND_NAME", $line_friends['usuario']);
+
+                        $template->parseCurrentBlock();
+                    }
+
+                    $i++;
+                }
+
+                if($i) {
+                    mysqli_free_result($result_friends);
+                }
+                
+                $template->setCurrentBlock("LISTS");
+
+                $query_lists = "SELECT * FROM b_listas WHERE id_cuenta = $this_user_id";
+                $result_lists = mysqli_query($link, $query_lists);
+
+                $i = 0;
+
+                while($line_lists = mysqli_fetch_assoc($result_lists)) {
+                    $list_id = $line_lists['id_lista'];
+
+                    $query_already_saved = "SELECT * FROM b_listas_libros WHERE id_libro = $book_id AND id_lista = $list_id";
+                    $result_already_saved = mysqli_query($link, $query_already_saved);
+
+                    if($line_already_saved = mysqli_fetch_assoc($result_already_saved)) {
+                        mysqli_free_result($result_already_saved);
+                    } else {
+                        $template->setCurrentBlock("LISTS");
+
+                        $template->setVariable("LIST_ID", $list_id);
+                        $template->setVariable("LIST_NAME", $line_lists['nombre']);
+
+                        $template->parseCurrentBlock();
+                    }
+
+                    $i++;
+                }
+
+                if($i) {
+                    mysqli_free_result($result_friends);
+                }
 
                 $template->parseCurrentBlock();
 
-                $j++;
+                mysqli_free_result($result_books); // libera memoria
+            } else {
+                print("No hay nada"); // missing template
             }
-
-            // libera memoria
-            if($j) {
-                mysqli_free_result($result_genres);
-            }
-
-            $template->parseCurrentBlock();
-
-            mysqli_free_result($result_books); // libera memoria
-        } else {
-            print("No hay nada"); // missing template
         }
-
+        
         mysqli_free_result($result_users); // libera memoria
     } else {
         $template->loadTemplatefile("backrooms.html", true, true);

@@ -12,7 +12,7 @@
     transition: 0.1s;
 }
 
-.form h1, .form > .forgot-password, .form > .redirect {
+.form h1, .form h2, .form h3, .form > .forgot-password, .form > .redirect {
     text-align: center;
 }
 
@@ -66,6 +66,10 @@
 
 .form button:active {
     background-color: #A49966;
+}
+
+.form button:disabled {
+    background-color: #73693B;
 }
 
 .form a {
